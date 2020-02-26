@@ -23,10 +23,10 @@ public class Pokemon {
 		this.name = name;
 		this.type = type;
 
-        this.tempHP = ((level/2)*(hpModifier*2)); // WIP NOT ACTUAL
+        	this.tempHP = ((level/2)*(hpModifier*2)); // WIP NOT ACTUAL
 
 		this.level = level;
-        this.exp = 0;
+        	this.exp = 0;
 
 		this.hpModifier = hpModifier;
 		this.atkModifier = atkModifier;
@@ -56,7 +56,7 @@ public class Pokemon {
 
         Move learning = Data.getMove(id);
 
-        System.out.println(name + "Wants to learn " +);
+        System.out.println(name + "Wants to learn " + learning.getName());
         if (moves.size()>=4) {
 
         } else {
