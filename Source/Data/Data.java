@@ -243,10 +243,12 @@ public class Data {
                 gen.setName("Ben");
                 gen.setTeamSize(1);
                 gen.setPrize(100);
+                Pokemon first = getPokemon(6,40);
+                first.addMove(getMove(0),0);
                 gen.addPokemon(getPokemon(6,40));
                 return gen;
+
             case 0:
-                
                 gen.setName("Jimmy");
                 gen.setTeamSize(2);
                 gen.setPrize(180);
@@ -283,7 +285,7 @@ public class Data {
         }
     }*/
 
-    public static Move getMoves(int id) {
+    public static Move getMove(int id) {
 
         switch(id) {
             

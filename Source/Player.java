@@ -59,5 +59,20 @@ public class Player {
             team.add(teamIndex,pc.remove(pcIndex));
         }
     }
+
+    public String getName() {
+
+        return name;
+    }
+
+    public ArrayList<Pokemon> getTeam() {
+
+        return team;
+    }
+
+    public String toString() {
+
+        return "test";
+    }
     
 }

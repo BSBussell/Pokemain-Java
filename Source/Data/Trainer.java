@@ -43,4 +43,14 @@ public class Trainer {
 
         team.add(pokemon);
     }
+
+    public String getName() {
+
+        return name;
+    }
+
+    public ArrayList<Pokemon> getTeam() {
+
+        return team;
+    }
 }

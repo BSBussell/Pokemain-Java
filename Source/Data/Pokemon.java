@@ -56,9 +56,17 @@ public class Pokemon {
 
         Move learning = Data.getMove(id);
 
-        System.out.println(name + "Wants to learn " + learning.getName() + "...");
+        Text.say(name + "Wants to learn " + learning.getName() + "...");
         if (moves.size()>=4) {
-			System.out.println("But " +name+ " already knows four moves...");
+			Text.say("But " +name+ " already knows four moves...");
+            Text.pause();
+            boolean wantToLearn = Text.pickOption("Does " + name + " want to forget a old move and learn " + learning.getName()+"?","Yes, learn a new move", "No, keep old moves");
+
+            if (wantToLearn==false) {
+                Text.say(name+ " did not learn the move " + learning.getName() +". ");
+                Text.pause();
+                return;
+            }
         } else {
             
             System.out.println(name + " learned " + learning.getName());
@@ -80,5 +88,10 @@ public class Pokemon {
     public int getLevel() {
 
         return this.level;
+    }
+
+    public String toString() {
+
+        return "Species: " + name + "\nLevel: " + level;
     }
 }

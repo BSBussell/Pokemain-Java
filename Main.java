@@ -3,15 +3,18 @@ import java.util.Scanner;
 class Main {
     public static void main(String[] args) {
 
-        Scanner keyboard = new Scanner(System.in);
-        System.out.println("Hi boy or gorl?");
-        System.out.println("What is you Name: ");
-
-        String name = keyboard.nextLine();
-
-        System.out.println(name + ", so you're the person...");
+        Text.clearScreen();
+        
+        Text.pickOption("Are you boi or gorl?", "yes", "gorl");
+        String name = Text.response("What is your name: ");
 
         Player main = new Player(name,500);
+        
+        Text.say("Well " + name + ", Welcome to the world of Pokemon...");
+        Text.pause();
+
+        String[] places = new String[]{"Here","There","No","N-Word"};
+        Text.menu("Where would you like to go?", places);
 
         loadBattleTest(main);
         
@@ -21,12 +24,13 @@ class Main {
 
         //Data sheet = new Data();
 
-        Pokemon playable = Data.getPokemon(4,45);
+        Pokemon playable = Data.getPokemon(6,45);
+        playable.addMove(Data.getMove(10),0);
         main.addPokemonToTeam(playable,0);
 
-        System.out.println(main.team);
+        Trainer opponet = Data.getTrainer(-1);
 
-
+        Battle demo = new Battle(main,opponet);
     }
 }
 
