@@ -20,4 +20,19 @@ public class Move {
 
     //other shit
     public Move(String name, String type, String stat) {}
+    
+    public String getName() {
+        
+        return this.name;
+    }
+    
+    public int getPower() {
+        
+        return this.power;
+    }
+    
+    public int getAccuracy() {
+        
+        return this.accuracy;
+    }
 }

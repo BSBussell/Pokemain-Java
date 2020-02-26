@@ -56,9 +56,9 @@ public class Pokemon {
 
         Move learning = Data.getMove(id);
 
-        System.out.println(name + "Wants to learn " + learning.getName());
+        System.out.println(name + "Wants to learn " + learning.getName() + "...");
         if (moves.size()>=4) {
-
+			System.out.println("But " +name+ " already knows four moves...");
         } else {
             
             System.out.println(name + " learned " + learning.getName());

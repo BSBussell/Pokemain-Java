@@ -42,7 +42,7 @@ public class Player {
             pc.add(team.remove(position));
             team.add(position, creature);
         } else {
-            System.out.println("No");
+        
             team.add(creature);
         }
    
