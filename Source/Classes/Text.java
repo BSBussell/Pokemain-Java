@@ -40,12 +40,100 @@ public class Text {
             clearScreen();
             System.out.println(prompt);
 
+            System.out.print("> ");
             response = keyboard.nextLine();
             confirm  = pickOption("Are you sure with " + response + "?", "yes", "no");
         }
         
         return response;
 
+    }
+
+    public static int drawMainBattleMenu() {
+
+        System.out.println("*===================*");
+        System.out.println("= (1)Fight   (2)Bag =");
+        System.out.println("=                   =");
+        System.out.println("= (3)PKMN    (4)Run =");
+        System.out.println("*===================*");
+
+        newLines(3);
+        String response = "null";
+        
+        while (true) {
+            
+            System.out.print("> ");
+            response = keyboard.nextLine();
+
+            if (response.equalsIgnoreCase("1")) {
+                break;
+            }
+            if (response.equalsIgnoreCase("2")) {
+                break;
+            }
+            if (response.equalsIgnoreCase("3")) {
+                break;
+            }
+            if (response.equalsIgnoreCase("4")) {
+                break;
+            }
+            
+        }
+
+        return Integer.parseInt(response);
+    }
+
+    public static int drawAttackMenu(String move1, String move2, String move3, String move4) {
+
+        String emptySpace = "                    ";
+        move1 = move1 + emptySpace.substring(0,20-move1.length());
+        move2 = move2 + emptySpace.substring(0,20-move2.length());
+        move3 = move3 + emptySpace.substring(0,20-move3.length());
+        move4 = move4 + emptySpace.substring(0,20-move4.length());
+        
+        System.out.println("*========================*");
+        System.out.println("= (1)"+move1+"=");
+        System.out.println("= (2)"+move2+"=");
+        System.out.println("= (3)"+move3+"=");
+        System.out.println("= (4)"+move4+"=");
+        System.out.println("= (5)Back                =");
+        System.out.println("*========================*");      
+
+        newLines(3);
+        String response = "null";
+        
+        while (true) {
+            
+            System.out.print("> ");
+            response = keyboard.nextLine();
+
+            if (response.equalsIgnoreCase("1")) {
+                break;
+            }
+            if (response.equalsIgnoreCase("2")) {
+                break;
+            }
+            if (response.equalsIgnoreCase("3")) {
+                break;
+            }
+            if (response.equalsIgnoreCase("4")) {
+                break;
+            }
+            if (response.equalsIgnoreCase("5")) {
+                break;
+            }
+            
+        }
+
+        return Integer.parseInt(response);  
+    }
+
+    public static void newLines(int amount) {
+
+        for (int i = 0; i < amount; i++) {
+
+            System.out.println();
+        }
     }
 
     public static void say(String text) {
@@ -58,7 +146,7 @@ public class Text {
         int result = -1;
         int count = 1;
 
-        while(!(result > 0 && result < choices.length)) {
+        while(!(result > 0 && result <= choices.length)) {
             clearScreen();
             System.out.println(prompt);
 
@@ -91,7 +179,7 @@ public class Text {
     }
 
     public static void pauseNC() {
-        System.out.println(". . .");
+        System.out.print(". . .");
         keyboard.nextLine();
 
     }

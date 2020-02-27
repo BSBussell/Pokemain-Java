@@ -224,7 +224,154 @@ public class Data {
                 
             case 73:
                 return new Pokemon("Tentacruel", "Water", level, 5,5,5,5,5);
+            
+            case 74: 
+                return new Pokemon("Geodude", "Ground", level, 3,3,3,3,3);
+
+            case 75:
+                return new Pokemon("Graveler", "Ground", level, 5,5,5,5,5);
+
+            case 76:
+                return new Pokemon("Golem", "Ground", level, 7,7,7,7,7);
+
+            case 77:
+                return new Pokemon("Ponyta", "Fire", level, 3,3,3,3,3);
+
+            case 78: 
+                return new Pokemon("Rapidash", "Fire", level, 5,5,5,5,5);
+            
+            case 79:
+                return new Pokemon("Slowpoke", "Water", level, 3,3,3,3,3);
+            
+            case 80:
+                return new Pokemon("Slowbro", "Water", level, 5,5,5,5,5);
+
+            case 81:
+                return new Pokemon("Magnemite", "Electric", level, 3,3,3,3,3);
+
+            case 82:
+                return new Pokemon("Magneton", "Electric", level, 5,5,5,5,5);
+            
+            case 83:
+                return new Pokemon("Farfeth'd", "Flying", level, 3,3,3,3,3);
+
+            case 84:
+                return new Pokemon("Doduo", "Flying", level, 3,3,3,3,3);
+
+            case 85:
+                return new Pokemon("Dodrio", "Flying", level, 5,5,5,5,5);
+
+            case 86:
+                return new Pokemon("Seel", "Water", level, 3,3,3,3,3);
+
+            case 87:
+                return new Pokemon("Dewgong", "Water", level, 5,5,5,5,5);
+
+            case 88:
+                return new Pokemon("Grimer", "Poison", level, 3,3,3,3,3);
+
+            case 89:
+                return new Pokemon("Muk", "Poison", level, 5,5,5,5,5);
+
+            case 90:
+                return new Pokemon("Shellder", "Water", level, 3,3,3,3,3);
+
+            case 91:
+                return new Pokemon("Cloyster", "Water", level, 5,5,5,5,5);
+
+            case 92:
+                return new Pokemon("Gastly", "Ghost", level, 3,3,3,3,3);
+
+            case 93:
+                return new Pokemon("Haunter", "Ghost", level, 5,5,5,5,5);
+
+            case 94: 
+                return new Pokemon("Gengar", "Ghost", level, 7,7,7,7,7);
+            
+            case 95:
+                return new Pokemon("Onix", "Rock", level, 3,3,3,3,3);
+
+            case 96: 
+                return new Pokemon("Drowzee", "Psychic", level, 3,3,3,3,3);
+
+            case 97:
+                return new Pokemon("Hypno", "Psychic", level, 5,5,5,5,5);
+            
+            case 98:
+                return new Pokemon("Krabby", "Water", level, 3,3,3,3,3);
+
+            case 99:
+                return new Pokemon("Kingler", "Water", level, 5,5,5,5,5);
+
+            case 100:
+                return new Pokemon("Voltorb", "Electric", level, 3,3,3,3,3);
+
+            case 101:
+                return new Pokemon("Electrode", "Electric", level, 5,5,5,5,5);
+
+            case 102:
+                return new Pokemon("Exeggcute", "Grass", level, 3,3,3,3,3);
                 
+            case 103:
+                return new Pokemon("Exeggcutor", "Grass", level, 5,5,5,5,5);
+
+            case 104:
+                return new Pokemon("Cubone", "Ground", level, 3,3,3,3,3);
+
+            case 105:
+                return new Pokemon("Marowak", "Ground", level, 5,5,5,5,5);
+                
+            case 106:
+                return new Pokemon("Hitmonlee", "Fighting", level, 5,5,5,5,5);
+
+            case 107:
+                return new Pokemon("Hitmonchan", "Fighting", level, 5,5,5,5,5);
+
+            case 108:
+                return new Pokemon("Lickitung", "Normal", level, 3,3,3,3,3);
+                
+            case 109:
+                return new Pokemon("Koffing", "Poison", level, 3,3,3,3,3);
+
+            case 110:
+                return new Pokemon("Weezing", "Poison", level, 5,5,5,5,5);
+                
+            case 111:
+                return new Pokemon("Rhyhorn", "Ground", level, 3,3,3,3,3);
+                
+            case 112:
+                return new Pokemon("Rhydon", "Ground", level, 5,5,5,5,5);
+                
+            case 113:
+                return new Pokemon("Chansey", "Normal", level, 3,3,3,3,3);
+                
+            case 114:
+                return new Pokemon("Tangela", "Grass", level, 3,3,3,3,3);
+
+            case 115:
+                return new Pokemon("Kangaskhan", "Normal", level, 7,7,7,7,7);
+                
+            case 116:
+                return new Pokemon("Horsea", "Water", level, 3,3,3,3,3);
+
+            case 117:
+                return new Pokemon("Seadra", "Water", level, 5,5,5,5,5);
+
+            case 118:
+                return new Pokemon("Goldeen", "Water", level, 3,3,3,3,3);
+
+            case 119:
+                return new Pokemon("Seaking", "Water", level, 5,5,5,5,5);
+
+            case 120:
+                return new Pokemon("Staryu", "Water", level, 3,3,3,3,3);
+
+            case 121:
+                return new Pokemon("Starmie", "Water", level, 5,5,5,5,5);
+
+            case 122:
+                return new Pokemon("Mr. Mime", "Psychic", level, 5,5,5,5,5);
+
             case 152:
                 return new Pokemon();
             
@@ -295,45 +442,79 @@ public class Data {
                 
             case 1:
                 return new Move("Acid", "Poison", 40, 100, false);
-                
+            
             case 2:
-                return new Move("Barrage", "Normal", 15, 85, true);
-                //Hits 2-5 times
+                return new Move("Aurora Beam", "Ice", 65, 100, false);
                 
             case 3:
+                return new Move("Barrage", "Normal", 15, 85, true);
+                //Hits 2-5 times
+
+            case 4:
                 return new Move("Bind", "Normal", 15, 85, true);
                 //traps opponent, damaging them for 4-5 turns
+            
+            case 5:
+                return new Move("Blizzard", "Ice", 110, 70, false);
+                //May freeze opponent
                 
-            case 4:
+            case 6:
                 return new Move("Body Slam", "Normal", 85, 100, true);
                 //may paralyze
                 
-            case 5:
+            case 7:
                 return new Move("Bone Club", "Ground", 65, 85, true);
                 //may flinch
                 
-            case 6:
+            case 8:
                 return new Move("Bonemerang", "Ground", 50, 90, true);
                 //hits twice
                 
-            case 7:
+            case 9:
                 return new Move("Bubble", "Water", 40, 100, false);  
                 
-            case 8:
+            case 10:
                 return new Move("Bubble Beam", "Water", 65, 100, false);
                 
-            case 9:
+            case 11:
                 return new Move("Clamp", "Water", 35, 85, true);
                 //Traps opponent, damaging them for 4-5 turns.
                 
-            case 10:
+            case 12:
                 return new Move("Comet Punch", "Normal", 18, 85, true);
                 //Hits 2-5 times
                 
-            /*case 11:
-                return new Move();
+            case 13:
+                return new Move("Confusion", "Psychic", 50, 100, false);
+                //may confuse
                 
-                */
+            case 14: 
+                return new Move("Contrict", "Normal", 10, 100, true);
+                //may lower speed
+                
+            case 15:
+                return new Move("Crab Rave", "Water", 100, 90, true);
+                //orginally cranbhammer
+                //high crit chance
+            case 16:
+                return new Move("Cut", "Normal", 50, 95, true);
+            
+            case 17:
+                return new Move("Dig", "Ground", 80, 100, true);
+                //dig first turn attack second turn
+                
+            case 18:
+                return new Move("Dizzy Punch", "Normal", 70, 100, true);
+                //May confuse
+            
+            case 19:
+                return new Move("Double Kick", "Fighting", 30, 100, true);
+                //Hits twice
+            /*
+            case 20:
+              */  
+                
+                
                 
             default:
                 return new Move("","",0,0,false);
@@ -359,5 +540,88 @@ public class Data {
             */
             
         }
+    }
+
+    public static Move learnSet(int level, String type) {
+        
+        switch(type) {
+            
+            case "Normal":
+                switch(level) {
+                    case 0:
+                        break;
+                }
+            case "Fire":
+                switch(level) {
+                    case 0:
+                        break;
+                }
+            case "Water":
+                switch(level) {
+                    case 0:
+                        break;
+                }
+            case "Electric":
+                switch(level) {
+                    case 0:
+                        break;
+                }
+            case "Grass":
+                switch(level) {
+                    case 0:
+                        break;
+                }
+            case "Ice":
+                switch(level) {
+                    case 0:
+                        break;
+                }
+            case "Fighting":
+                switch(level) {
+                    case 0:
+                        break;
+                }
+            case "Poison":
+                switch(level) {
+                    case 0:
+                        break;
+                }
+            case "Ground":
+                switch(level) {
+                    case 0:
+                        break;
+                }
+            case "Fly":
+                switch(level) {
+                    case 0:
+                        break;
+                }
+            case "Psychic":
+                switch(level) {
+                    case 0:
+                        break;
+                }
+            case "Bug":
+                switch(level) {
+                    case 0:
+                        break;
+                }
+            case "Rock":
+                switch(level) {
+                    case 0:
+                        break;
+                }
+            case "Ghost":
+                switch(level) {
+                    case 0:
+                        break;
+                }
+            case "Dragon":
+                switch(level) {
+                    case 0:
+                        break;
+                }
+        }
+    return getMove(0);
     }
 }

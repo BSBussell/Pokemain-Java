@@ -23,10 +23,10 @@ public class Pokemon {
 		this.name = name;
 		this.type = type;
 
-        	this.tempHP = ((level/2)*(hpModifier*2)); // WIP NOT ACTUAL
+        this.tempHP = ((level*hpModifier)/3)+level+hpModifier;
 
 		this.level = level;
-        	this.exp = 0;
+        this.exp = 0;
 
 		this.hpModifier = hpModifier;
 		this.atkModifier = atkModifier;
@@ -50,6 +50,14 @@ public class Pokemon {
         spdModifier = 1000;
     
         
+    }
+
+    public void genMoves() {
+
+        for (int i = 0; i < level; i++) {
+
+            Data.learnSet(i, type);
+        }
     }
 
     public void learnMove(int id) {
@@ -90,8 +98,50 @@ public class Pokemon {
         return this.level;
     }
 
+    public String getType() {
+
+        return this.type;
+    }
+    
+    public int getTempHP() {
+
+        return this.tempHP;
+    }
+
+    public int getMaxHP() {
+
+        return ((level*hpModifier)/3)+level+hpModifier;
+    }
+
+    public int getActualAttack() {
+
+        return ((level*atkModifier)/3) + (level/4);
+    }
+
+    public int getActualDefense() {
+
+        return ((level*defModifier)/3) + (level/4);
+    }
+
+    public int getActualSpecial() {
+
+        return ((level*splModifier)/3) + (level/4);
+    }
+
+    public int getActualSpeed() {
+
+        return ((level*spdModifier)/3) + (level/4);
+    }
+    
+    public ArrayList<Move> getMoves() {
+
+        return moves;
+    }
+
     public String toString() {
 
         return "Species: " + name + "\nLevel: " + level;
     }
+
+    
 }

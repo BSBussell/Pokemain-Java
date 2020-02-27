@@ -14,7 +14,11 @@ class Main {
         Text.pause();
 
         String[] places = new String[]{"Here","There","No","N-Word"};
-        Text.menu("Where would you like to go?", places);
+        int location = Text.menu("Where would you like to go?", places);
+        if (location == 4) {
+            Text.say("39 Lashing for " + name);
+            Text.pause();
+        }
 
         loadBattleTest(main);
         
@@ -24,7 +28,7 @@ class Main {
 
         //Data sheet = new Data();
 
-        Pokemon playable = Data.getPokemon(6,45);
+        Pokemon playable = Data.getPokemon(9,45);
         playable.addMove(Data.getMove(10),0);
         main.addPokemonToTeam(playable,0);
 

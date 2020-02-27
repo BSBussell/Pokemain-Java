@@ -26,11 +26,21 @@ public class Move {
         return this.name;
     }
     
+    public String getType() {
+
+        return this.type;
+    }
+
     public int getPower() {
         
         return this.power;
     }
     
+    public boolean isPhysical() {
+
+        return this.physical;
+    }
+
     public int getAccuracy() {
         
         return this.accuracy;
