@@ -85,7 +85,10 @@ public class Pokemon {
     
     public void addMove(Move name, int pos) {
         
-        moves.add(pos, name);
+        if (moves.size() > 0)
+            moves.set(pos, name);
+        else
+            moves.add(name);
     }
 
     public String getName() {
@@ -136,6 +139,16 @@ public class Pokemon {
     public ArrayList<Move> getMoves() {
 
         return moves;
+    }
+
+    public void heal(int amount) {
+
+        this.tempHP = (this.tempHP > getMaxHP()) ? getMaxHP() : this.tempHP+amount;
+    }
+
+    public void damage(int damage) {
+
+        tempHP = tempHP-damage;
     }
 
     public String toString() {

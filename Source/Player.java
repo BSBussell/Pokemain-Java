@@ -35,6 +35,14 @@ public class Player {
         team.add(creature);
     }
 
+    public void healTeam() {
+
+        for (Pokemon creature : team) {
+
+            creature.heal(999999);
+        }
+    }
+
     public void addPokemonToTeam(Pokemon creature, int position) {
 
         if (team.size() >= position+1) {
@@ -68,6 +76,11 @@ public class Player {
     public ArrayList<Pokemon> getTeam() {
 
         return team;
+    }
+
+    public void setName(String name) {
+
+        this.name = name;
     }
 
     public String toString() {

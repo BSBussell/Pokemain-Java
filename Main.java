@@ -13,28 +13,53 @@ class Main {
         Text.say("Well " + name + ", Welcome to the world of Pokemon...");
         Text.pause();
 
-        String[] places = new String[]{"Here","There","No","N-Word"};
-        int location = Text.menu("Where would you like to go?", places);
-        if (location == 4) {
-            Text.say("39 Lashing for " + name);
-            Text.pause();
-        }
+        gameLoop(main);
 
-        loadBattleTest(main);
+        
         
     }
 
-    public static void loadBattleTest(Player main) {
-
-        //Data sheet = new Data();
+    public static void gameLoop(Player main) {
 
         Pokemon playable = Data.getPokemon(9,45);
         playable.addMove(Data.getMove(10),0);
         main.addPokemonToTeam(playable,0);
 
+
+        while(true) {
+            String[] places = new String[]{"Wild", "Trainer", "PokeCenter","DeBug","N-Word", "STats"};
+            int location = Text.menu("Where would you like to go?", places);
+            if (location == 3) {
+
+                main.healTeam();
+                Text.say("Pokemon have been Healed.");
+                Text.pause();
+            } else if (location == 4) {
+
+                Text.say("Loading Debug Battle. . .");
+                main = loadBattleTest(main);
+            } else if (location == 5) {
+            
+                Text.say("39 Lashing for " + main.getName());
+                Text.pause();
+            } else if (location == 6) {
+
+                Text.say(""+main.getTeam().get(0).getTempHP());
+                Text.pause();
+            }
+        }
+    }
+
+    public static Player loadBattleTest(Player main) {
+
+        //Data sheet = new Data();
+
+        
         Trainer opponet = Data.getTrainer(-1);
 
         Battle demo = new Battle(main,opponet);
+
+        return demo.battleStart();
     }
 }
 

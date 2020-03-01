@@ -13,12 +13,15 @@ public class Battle {
     ArrayList<Pokemon> playerTeam = new ArrayList<Pokemon>();
     ArrayList<Pokemon> trainerTeam = new ArrayList<Pokemon>();
 
+    Pokemon playerActivePokemon;
+    Pokemon trainerActivePokemon;
+
     int playerActiveSlot = 0;
     int trainerActiveSlot = 0;
 
     int menuLocation = 0;
 
-    Random rand = new Random();
+    
 
     public Battle(Player you, Trainer opponet) {
 
@@ -30,41 +33,71 @@ public class Battle {
 
         this.playerTeam = you.getTeam();
         this.trainerTeam = opponet.getTeam();
+
+        this.playerActivePokemon = playerTeam.get(0);
+        this.trainerActivePokemon = trainerTeam.get(0);
         
-        battleStart();
     }
 
-    public void battleStart() {
+    public Player battleStart() {
 
         Text.clearScreen();
         Text.say(playerName + " V.S " + trainerName);
         Text.pauseNC();
 
-        Text.say(trainerName + " Sent out " + trainerTeam.get(0).getName());
+        Text.say(trainerName + " Sent out " + playerActivePokemon.getName());
         Text.pauseNC();
-        Text.say(playerName + " Sends out " + playerTeam.get(0).getName());
+        Text.say(playerName + " Sends out " + trainerActivePokemon.getName());
 
         Text.pauseNC();
         Text.clearScreen();
 
-        battleLoop();
+        return battleLoop();
     }
 
-    public void battleLoop() {
+    public Player battleLoop() {
 
-        while (true) {
+        while (trainerActivePokemon.getTempHP() > 0 && playerActivePokemon.getTempHP() > 0) {
 
             battleDraw();
         }
-    }
+        
+        if (trainerActivePokemon.getTempHP() < 0) {
 
+            Text.say(trainerActivePokemon.getName() + " has fainted. . .");
+            Text.pauseNC();
+
+            if( !anyUsable(trainerTeam)) {
+
+                Text.say(trainerName + " is out of usable Pokemon.");
+            }
+
+            Text.pauseNC();
+            return you;
+        } else if (playerTeam.get(trainerActiveSlot).getTempHP() < 0) {
+
+            Text.say(playerActivePokemon.getName() + " has fainted. . .");
+
+            if( !anyUsable(playerTeam)) {
+
+                Text.say(playerName + " is out of usable Pokemon.");
+            }
+            Text.pauseNC();
+            return you;
+        } else {
+            Text.say("I know it is possible to reach this point somehow. However right now I have a headache\n"+
+                    "and i'm in so many layers of abstraction that I'm kind of losing track. . .");
+            return you;
+        }
+    }
+ 
     public void battleDraw() {
 
         Text.clearScreen();
 
-        drawHealthBar(trainerTeam.get(trainerActiveSlot));
+        drawHealthBar(trainerActivePokemon);
         Text.newLines(6);
-        drawHealthBar(playerTeam.get(playerActiveSlot));
+        drawHealthBar(playerActivePokemon);
         Text.newLines(2);
 
         switch(menuLocation) {
@@ -74,7 +107,7 @@ public class Battle {
                 break;
             case 1:
                 ArrayList<Move> moveList = new ArrayList<Move>();
-                moveList = playerTeam.get(playerActiveSlot).getMoves();
+                moveList = playerActivePokemon.getMoves();
                 String move1,move2,move3,move4;
                 if (moveList.size()>0)
                     move1 = moveList.get(0).getName();
@@ -102,6 +135,7 @@ public class Battle {
             case 2:
                 Text.say("WIP");
                 Text.pause();
+                menuLocation = 0;
                 break;
             case 3:
                 Text.say("WIP");
@@ -115,6 +149,38 @@ public class Battle {
                 break;
             case 11:
                 
+                Move slot1 = playerActivePokemon.getMoves().get(0);
+
+                if (playerActivePokemon.getActualSpeed() > trainerActivePokemon.getActualSpeed()) {
+
+                    Text.say(playerActivePokemon.getName() +" used " + slot1.getName());
+                    int damageDone = calculateDamage(playerActivePokemon, trainerActivePokemon, slot1);
+                    
+                    trainerActivePokemon.damage(damageDone);
+                    
+                    Text.pauseNC();
+
+                    if (trainerActivePokemon.getTempHP() <= 0) {
+                        break;
+                    }
+
+                    Move opponetTurn = enemyMove(trainerActivePokemon, playerActivePokemon);
+                    Text.say(trainerActivePokemon.getName() + " used " + opponetTurn.getName());
+                    int opponetDamage = calculateDamage(trainerActivePokemon, playerActivePokemon, opponetTurn);
+
+                    playerActivePokemon.damage(opponetDamage);
+
+                    if (opponetTurn.getName().equals("Explosion")) {
+
+                        Text.say(trainerName+"'s " + playerActivePokemon.getName() + " blew itself up. . .");
+                        trainerActivePokemon.damage(9999);
+                    }
+
+                    Text.pauseNC();
+
+                    menuLocation = 0;
+
+                }
                 
 
             
@@ -123,31 +189,83 @@ public class Battle {
 
     }
 
+
+    public static Move enemyMove(Pokemon attacker, Pokemon defender) {
+
+        Move choice = new Move();
+
+        int maxDamage = 0;
+        int maxSlot = 0;
+        int slot = 0;
+
+        for (Move attack : attacker.getMoves()) {
+
+            if (attack.isDamaging()) {
+
+                if (calculateDamage(attacker, defender, attack) >= maxDamage) {
+
+                    maxDamage = calculateDamage(attacker, defender, attack);
+                    maxSlot = slot;
+                }
+                
+            }
+            slot = slot+1;
+
+
+        }
+        return attacker.getMoves().get(maxSlot);
+    }
+
     public static int calculateDamage(Pokemon attacker, Pokemon defender, Move move) {
+
+        Random rand = new Random();
 
         double levelMultiplier = ((2*attacker.getLevel())/5)+2;
 
+        
         double statsMultiplier = (move.isPhysical()) ? 
             attacker.getActualAttack()/defender.getActualDefense() :
             attacker.getActualSpecial()/defender.getActualSpecial();
+
+        statsMultiplier = (statsMultiplier==0) ? 1 : statsMultiplier;
 
         double randomMultiplier = 0.85 + (1.0 - 0.85) * rand.nextDouble();
         double stabBonus = (attacker.getType().equals(move.getType())) ? 1.5 : 1;
 
         double damage = (((levelMultiplier*move.getPower()*statsMultiplier)/50)+2)*(stabBonus*randomMultiplier);
+        
 
         return (int)Math.floor(damage);
     }
 
+    public static boolean anyUsable(ArrayList<Pokemon> team) {
+
+        for (Pokemon creatures : team) {
+            
+            
+            if (creatures.getTempHP() >= 0 ) {
+
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public static void drawHealthBar(Pokemon creature) {
 
-        int points = (creature.getTempHP()/creature.getMaxHP())*25;
+        double percent = ((double)creature.getTempHP()/(double)creature.getMaxHP());
+        int points = (int)Math.floor(percent*25.0);
 
         Text.say("  " + creature.getName()+ " LvL. " + creature.getLevel());
         System.out.print("██");
         for (int i = 0; i < points; i++) {
 
             System.out.print("=");
+        }
+        for (int i = points; i<25; i++) {
+
+            System.out.print(" ");
         }
         System.out.print("██");
     }
