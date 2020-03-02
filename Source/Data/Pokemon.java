@@ -23,7 +23,7 @@ public class Pokemon {
 		this.name = name;
 		this.type = type;
 
-        this.tempHP = ((level*hpModifier)/3)+level+hpModifier;
+        
 
 		this.level = level;
         this.exp = 0;
@@ -33,6 +33,8 @@ public class Pokemon {
 		this.defModifier = defModifier;
 		this.splModifier = splModifier;
 		this.spdModifier = splModifier;
+
+        this.tempHP = getMaxHP();
 	}
 
     public Pokemon() {
@@ -85,7 +87,7 @@ public class Pokemon {
     
     public void addMove(Move name, int pos) {
         
-        if (moves.size() > 0)
+        if (moves.size() > pos)
             moves.set(pos, name);
         else
             moves.add(name);
@@ -118,7 +120,7 @@ public class Pokemon {
 
     public int getMaxHP() {
 
-        return ((level*hpModifier)/3)+level+hpModifier;
+        return ((level*hpModifier)/3)+(level*2)+(hpModifier);
     }
 
     public int getActualAttack() {

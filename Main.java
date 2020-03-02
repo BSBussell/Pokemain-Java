@@ -1,6 +1,9 @@
 import java.util.Scanner;
 
 class Main {
+    
+    
+    
     public static void main(String[] args) {
 
         Text.clearScreen();
@@ -14,17 +17,53 @@ class Main {
         Text.say("Well " + name + ", Welcome to the world of Pokemon...");
         Text.pause();
 
+        
+        starterPokemon(main);
         gameLoop(main);
 
         
         
     }
 
+    public static void starterPokemon(Player main) {
+
+        Text.say("AYY LMAO.");
+        String[] starters = new String[]{"Charmander","Bulbasaur","Squirtle"};
+        int selection = Text.menu("Pick a Starter Pokemon!", starters);
+
+        switch(selection) {
+
+            case 1:
+                Text.say("You Picked Charmander!!!");
+                Text.pause();
+                Pokemon charmander = Data.getPokemon(4, 5);
+                charmander.addMove(Data.getMove(27),0);
+                charmander.addMove(Data.getMove(16),1);
+                main.addPokemonToTeam(charmander,0);
+                break;
+            case 2:
+                Text.say("You Picked Bulbasaur!!!");
+                Text.pause();
+                Pokemon bulbasaur = Data.getPokemon(1,5);
+                bulbasaur.addMove(Data.getMove(0),0);
+                main.addPokemonToTeam(bulbasaur,0);
+                break;
+            case 3:
+                Text.say("You Picked Squirtle!!!");
+                Text.pause();
+                Pokemon squirtle = Data.getPokemon(7, 5);
+                squirtle.addMove(Data.getMove(10), 0);
+                main.addPokemonToTeam(squirtle,0);
+                break;
+        }
+
+    }
+
     public static void gameLoop(Player main) {
 
-        Pokemon playable = Data.getPokemon(9,10);
+        /*Pokemon playable = Data.getPokemon(9,10);
         playable.addMove(Data.getMove(10),0);
-        main.addPokemonToTeam(playable,0);
+        main.addPokemonToTeam(playable,0);*/
 
 
         while(true) {
@@ -62,8 +101,8 @@ class Main {
 
     public static void loadWildBattleTest(Player main) {
 
-        Pokemon first = Data.getPokemon(6,10);
-        first.addMove(Data.getMove(28),0);
+        Pokemon first = Data.getPokemon(1,5);
+        first.addMove(Data.getMove(0),0);
 
         Battle demo = new Battle(main, first);
         demo.battleStart();

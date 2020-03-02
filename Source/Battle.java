@@ -11,6 +11,7 @@ public class Battle {
     String trainerName;
 
     boolean isTrainer = true;
+    boolean escape = false;
 
     ArrayList<Pokemon> playerTeam = new ArrayList<Pokemon>();
     ArrayList<Pokemon> trainerTeam = new ArrayList<Pokemon>();
@@ -86,7 +87,7 @@ public class Battle {
 
     public void battleLoop() {
 
-        while (trainerActivePokemon.getTempHP() > 0 && playerActivePokemon.getTempHP() > 0) {
+        while (trainerActivePokemon.getTempHP() > 0 && playerActivePokemon.getTempHP() > 0 ) {
 
             battleDraw();
 
@@ -118,6 +119,11 @@ public class Battle {
                 Text.pauseNC();
                 return;
             }
+
+            if (escape) {
+
+                return;
+            }
         }
         
         
@@ -127,6 +133,9 @@ public class Battle {
     }
 
     public void battleDraw() {
+
+        Move playerTurn;
+        Move opponetTurn;
 
         Text.clearScreen();
 
@@ -184,21 +193,77 @@ public class Battle {
                 menuLocation = 0;
                 break;
             } else {
-                
+                Text.say("PLease chill guys I can only work so fast...");
+                int top = this.playerActivePokemon.getActualSpeed()*28;
+                int chance = (top/this.trainerActivePokemon.getActualSpeed())+30;
+                if (chance > 80) {
+                    Text.say("You got away safely.");
+                    Text.pause();
+                    escape = true;
+                    break;
+                }
+                Text.say("You couldn't get away.");
+                Text.pauseNC();
+                opponetAttack();
+
+                menuLocation = 0;
                 break;
             }
         case 11:
 
-            Move playerTurn = playerActivePokemon.getMoves().get(0);
-            Move opponetTurn = enemyMove(trainerActivePokemon, playerActivePokemon);
+            playerTurn = playerActivePokemon.getMoves().get(0);
+            opponetTurn = enemyMove(trainerActivePokemon, playerActivePokemon);
 
             takeTurn(playerTurn, opponetTurn);
             
 
             menuLocation = 0;
+            break;
+        case 12:
+
+            playerTurn = playerActivePokemon.getMoves().get(1);
+            opponetTurn = enemyMove(trainerActivePokemon, playerActivePokemon);
+
+            takeTurn(playerTurn, opponetTurn);
+            
+
+            menuLocation = 0;
+            break;
+        case 13:
+
+            playerTurn = playerActivePokemon.getMoves().get(2);
+            opponetTurn = enemyMove(trainerActivePokemon, playerActivePokemon);
+
+            takeTurn(playerTurn, opponetTurn);
+            
+
+            menuLocation = 0;
+            break;
+
+        case 14:
+
+            playerTurn = playerActivePokemon.getMoves().get(3);
+            opponetTurn = enemyMove(trainerActivePokemon, playerActivePokemon);
+
+            takeTurn(playerTurn, opponetTurn);
+            
+
+            menuLocation = 0;
+            break;
 
         }
 
+    }
+
+    public void opponetAttack() {
+
+        Move opponetAttack = enemyMove(trainerActivePokemon, playerActivePokemon);
+        Text.say(trainerActivePokemon.getName() + " used " + opponetAttack.getName());
+        int opponetDamage = calculateDamage(trainerActivePokemon, playerActivePokemon, opponetAttack);
+
+        playerActivePokemon.damage(opponetDamage);
+        Text.pauseNC();
+        moveEffects(trainerActivePokemon, playerActivePokemon, opponetAttack);
     }
 
     public void takeTurn(Move playerAttack, Move opponetAttack) {
