@@ -2,23 +2,26 @@ import java.util.ArrayList;
 
 public class Player {
 
-    String name;
+    private String name;
 
-    ArrayList<Pokemon> team = new ArrayList<Pokemon>();
-    //ArrayList<Item> bag;
-    ArrayList<Pokemon> pc = new ArrayList<Pokemon>();
-    ArrayList<Pokemon> dex = new ArrayList<Pokemon>();
+    private ArrayList<Pokemon> team = new ArrayList<Pokemon>();
+    private ArrayList<Pokemon> pc = new ArrayList<Pokemon>();
+    private ArrayList<Pokemon> dex = new ArrayList<Pokemon>();
+
+    private int[] bag = new int[] {0,0,0,0};
     
-    int leadersBeat;
-    int cash;
+    private int leadersBeat;
+    private int cash;
     
-    int pokedex;
+    private int pokedex;
     
     public Player(String name, int cash) {
         
         this.name = name;
         this.cash = cash;
     }
+
+    
 
     public void checkDex(Pokemon creature) {
 

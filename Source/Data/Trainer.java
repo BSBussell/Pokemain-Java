@@ -2,13 +2,13 @@ import java.util.ArrayList;
 
 public class Trainer {
 
-    String name;
+    private String name;
 
-    int numberOfPokemon;
-    ArrayList<Pokemon> team = new ArrayList<Pokemon>();
+    private int numberOfPokemon;
+    private ArrayList<Pokemon> team = new ArrayList<Pokemon>();
     
-    int cashPrize;
-    boolean isGymLeader;
+    private int cashPrize;
+    private boolean isGymLeader;
     
     public Trainer(String name, int numberOfPokemon, int cashPrize, boolean isGymLeader) {
 

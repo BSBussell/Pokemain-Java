@@ -2,23 +2,23 @@ import java.util.ArrayList;
 
 public class Pokemon {
 
-	String name;
-    String type;
+	private String name;
+    private String type;
 	
-    ArrayList<Move> moves = new ArrayList<Move>();
+    private ArrayList<Move> moves = new ArrayList<Move>();
 
-    int dexNumber;
-	int level;
-    int exp;
-    int evolutionLevel;
+    private int dexNumber;
+	private int level;
+    private int exp;
+    private int evolutionLevel;
 
-    int tempHP;
+    private int tempHP;
 
-	int hpModifier;
-	int atkModifier;
-	int defModifier;
-	int splModifier;
-	int spdModifier;
+	private int hpModifier;
+	private int atkModifier;
+	private int defModifier;
+	private int splModifier;
+	private int spdModifier;
 
 	public Pokemon(int dexNumber, String name, String type, int level, int hpModifier, int atkModifier, int defModifier, int splModifier, int spdModifier, int evolutionLevel) {
 

@@ -1,16 +1,16 @@
 
 public class Move {
 
-    String name;
-    String type;
+    private String name;
+    private String type;
 
-    String statToModify;
+    private String statToModify;
 
-    int accuracy;
-    int power;
+    private int accuracy;
+    private int power;
 
-    boolean physical;
-    boolean damaging;
+    private boolean physical;
+    private boolean damaging;
 
     //damaging moves
     public Move(String name, String type, int power, int accuracy, boolean physical) {

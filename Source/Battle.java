@@ -4,25 +4,25 @@ import java.lang.Math;
 
 public class Battle {
 
-    Player you;
-    Trainer opponet;
+    private Player you;
+    private Trainer opponet;
 
-    String playerName;
-    String trainerName;
+    private String playerName;
+    private String trainerName;
 
-    boolean isTrainer = true;
-    boolean escape = false;
+    private boolean isTrainer = true;
+    private boolean escape = false;
 
-    ArrayList<Pokemon> playerTeam = new ArrayList<Pokemon>();
-    ArrayList<Pokemon> trainerTeam = new ArrayList<Pokemon>();
+    private ArrayList<Pokemon> playerTeam = new ArrayList<Pokemon>();
+    private ArrayList<Pokemon> trainerTeam = new ArrayList<Pokemon>();
 
-    Pokemon playerActivePokemon;
-    Pokemon trainerActivePokemon;
+    private Pokemon playerActivePokemon;
+    private Pokemon trainerActivePokemon;
 
-    int playerActiveSlot = 0;
-    int trainerActiveSlot = 0;
+    private int playerActiveSlot = 0;
+    private int trainerActiveSlot = 0;
 
-    int menuLocation = 0;
+    private int menuLocation = 0;
 
     public Battle(Player you, Trainer opponet) {
 
@@ -94,7 +94,7 @@ public class Battle {
             if (trainerActivePokemon.getTempHP() < 0) {
 
                 Text.say(trainerActivePokemon.getName() + " has fainted. . .");
-                int expGained = trainerActivePokemon.expYield()*playerActivePokemon.getLevel()*100;
+                int expGained = trainerActivePokemon.expYield()*playerActivePokemon.getLevel();
                 playerActivePokemon.addEXP(expGained);
                 
 
