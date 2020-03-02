@@ -10,6 +10,8 @@ public class Battle {
     String playerName;
     String trainerName;
 
+    boolean isTrainer = true;
+
     ArrayList<Pokemon> playerTeam = new ArrayList<Pokemon>();
     ArrayList<Pokemon> trainerTeam = new ArrayList<Pokemon>();
 
@@ -35,6 +37,28 @@ public class Battle {
         this.playerActivePokemon = playerTeam.get(0);
         this.trainerActivePokemon = trainerTeam.get(0);
 
+    }
+
+    public Battle(Player you, Pokemon wild) {
+
+        this.you = you;
+        this.trainer = new Trainer()
+
+        this.trainer.setName("a Wild " + wild.getName());
+        this.trainer.setTeamSize(1);
+        this.trainer.setPrize(0);
+        this.trainer.addPokemon(wild);
+
+        this.isTrainer = false;
+
+        this.playerName = you.getName();
+        this.trainerName = this.trainer.getName();
+
+        this.playerTeam = you.getTeam();
+        this.trainerTeam = this.trainer.getTeam();
+
+        this.playerActivePokemon = playerTeam.get(0);
+        this.trainerActivePokemon = trainerTeam.get(0);
     }
 
     public void battleStart() {
@@ -147,10 +171,15 @@ public class Battle {
             menuLocation = 0;
             break;
         case 4:
-            Text.say("This is a trainer battle, you can't run away.");
-            Text.pause();
-            menuLocation = 0;
-            break;
+            if (this.isTrainer) {
+                Text.say("This is a trainer battle, you can't run away.");
+                Text.pause();
+                menuLocation = 0;
+                break;
+            } else {
+                
+                break;
+            }
         case 11:
 
             Move playerTurn = playerActivePokemon.getMoves().get(0);
