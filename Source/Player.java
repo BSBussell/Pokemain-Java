@@ -12,7 +12,7 @@ public class Player {
     
     private int leadersBeat;
     private int cash;
-    
+
     private int pokedex;
     
     public Player(String name, int cash) {
@@ -73,12 +73,17 @@ public class Player {
 
     public String getName() {
 
-        return name;
+        return this.name;
     }
 
     public ArrayList<Pokemon> getTeam() {
 
-        return team;
+        return this.team;
+    }
+
+    public int[] getBag() {
+
+        return this.bag;
     }
 
     public void setName(String name) {

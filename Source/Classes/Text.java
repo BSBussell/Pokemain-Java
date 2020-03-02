@@ -128,6 +128,44 @@ public class Text {
         return Integer.parseInt(response);  
     }
 
+    public static int drawBagSpace(String[] items) {
+
+        System.out.println("*========================*");
+        System.out.println("= (1)Poke Ball "  + "x" + items[0]+"=");
+        System.out.println("= (2)Great Ball " + "x" + items[1]+"=");
+        System.out.println("= (3)Ultra Ball " + "x" + items[2]+"=");
+        System.out.println("= (4)Master Ball " + "x" + items[3]+"=");
+        System.out.println("= (5)Back                =");
+        System.out.println("*========================*");
+
+        String response;
+
+        while (true) {
+
+            System.out.print("> ");
+            response = keyboard.nextLine();
+
+            if (response.equalsIgnoreCase("1")) {
+                break;
+            }
+            if (response.equalsIgnoreCase("2")) {
+                break;
+            }
+            if (response.equalsIgnoreCase("3")) {
+                break;
+            }
+            if (response.equalsIgnoreCase("4")) {
+                break;
+            }
+            if (response.equalsIgnoreCase("5")) {
+                break;
+            }
+
+        }
+
+        return Integer.parseInt(response);
+    }
+
     public static void newLines(int amount) {
 
         for (int i = 0; i < amount; i++) {
@@ -184,7 +222,7 @@ public class Text {
 
     }
 
-    public static void clearScreen() {  
+    public static void clearScreen() {
         System.out.print("\033[H\033[2J");  
         System.out.flush();  
     }  // Before Sanford ask me how this works, im just gonna cite StackOverflow as the author of this magical method.
