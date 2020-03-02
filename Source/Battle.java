@@ -94,7 +94,7 @@ public class Battle {
             if (trainerActivePokemon.getTempHP() < 0) {
 
                 Text.say(trainerActivePokemon.getName() + " has fainted. . .");
-                int expGained = trainerActivePokemon.expYield()*playerActivePokemon.getLevel();
+                int expGained = trainerActivePokemon.expYield()*playerActivePokemon.getLevel()*100;
                 playerActivePokemon.addEXP(expGained);
                 
 
@@ -273,6 +273,15 @@ public class Battle {
             Text.say(playerActivePokemon.getName() + " used " + playerAttack.getName());
             int damageDone = calculateDamage(playerActivePokemon, trainerActivePokemon, playerAttack);
 
+            double typeBonus = Data.typeEffectiveness(playerAttack.getType(), trainerActivePokemon.getType());
+            if (typeBonus == 0.0) {
+                Text.say("It had no effect.");
+            } else if (typeBonus == 0.5) {
+                Text.say("It was not very effective.");
+            } else if (typeBonus == 2.0) {
+                Text.say("It was super effective.");
+            }
+
             trainerActivePokemon.damage(damageDone);
             Text.pauseNC();
             moveEffects(playerActivePokemon, trainerActivePokemon,playerAttack);
@@ -287,6 +296,15 @@ public class Battle {
             Text.say(trainerActivePokemon.getName() + " used " + opponetAttack.getName());
             int opponetDamage = calculateDamage(trainerActivePokemon, playerActivePokemon, opponetAttack);
 
+            typeBonus = Data.typeEffectiveness(opponetAttack.getType(), playerActivePokemon.getType());
+            if (typeBonus == 0.0) {
+                Text.say("It had no effect.");
+            } else if (typeBonus == 0.5) {
+                Text.say("It was not very effective.");
+            } else if (typeBonus == 2.0) {
+                Text.say("It was super effective.");
+            }
+
             playerActivePokemon.damage(opponetDamage);
             Text.pauseNC();
             moveEffects(trainerActivePokemon, playerActivePokemon, opponetAttack);
@@ -298,6 +316,15 @@ public class Battle {
 
             Text.say(trainerActivePokemon.getName() + " used " + opponetAttack.getName());
             int opponetDamage = calculateDamage(trainerActivePokemon, playerActivePokemon, opponetAttack);
+
+            double typeBonus = Data.typeEffectiveness(opponetAttack.getType(), playerActivePokemon.getType());
+            if (typeBonus == 0.0) {
+                Text.say("It had no effect.");
+            } else if (typeBonus == 0.5) {
+                Text.say("It was not very effective.");
+            } else if (typeBonus == 2.0) {
+                Text.say("It was super effective.");
+            }
 
             playerActivePokemon.damage(opponetDamage);
             Text.pauseNC();
@@ -311,6 +338,15 @@ public class Battle {
 
             Text.say(playerActivePokemon.getName() + " used " + playerAttack.getName());
             int damageDone = calculateDamage(playerActivePokemon, trainerActivePokemon, playerAttack);
+            
+            typeBonus = Data.typeEffectiveness(playerAttack.getType(), trainerActivePokemon.getType());
+            if (typeBonus == 0.0) {
+                Text.say("It had no effect.");
+            } else if (typeBonus == 0.5) {
+                Text.say("It was not very effective.");
+            } else if (typeBonus == 2.0) {
+                Text.say("It was super effective.");
+            }
 
             trainerActivePokemon.damage(damageDone);
             Text.pauseNC();
@@ -370,18 +406,12 @@ public class Battle {
 
         double randomMultiplier = 0.85 + (1.0 - 0.85) * rand.nextDouble();
         double stabBonus = (attacker.getType().equals(move.getType())) ? 1.5 : 1;
-        double typeBonus = Data.typeEffectiveness(attacker.getType(), defender.getType());
+        double typeBonus = Data.typeEffectiveness(move.getType(), defender.getType());
 
         double damage = (((levelMultiplier * move.getPower() * statsMultiplier) / 50) + 2)
                 * (stabBonus * randomMultiplier * typeBonus);
 
-        if (typeBonus == 0.0) {
-            Text.say("It had no effect.");
-        } else if (typeBonus == 0.5) {
-            Text.say("It was not very effective.");
-        } else if (typeBonus == 2.0) {
-            Text.say("It was super effective.");
-        }
+        
 
         return (int) Math.floor(damage);
     }

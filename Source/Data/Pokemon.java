@@ -7,8 +7,10 @@ public class Pokemon {
 	
     ArrayList<Move> moves = new ArrayList<Move>();
 
+    int dexNumber;
 	int level;
     int exp;
+    int evolutionLevel;
 
     int tempHP;
 
@@ -18,15 +20,39 @@ public class Pokemon {
 	int splModifier;
 	int spdModifier;
 
-	public Pokemon(String name, String type, int level, int hpModifier, int atkModifier, int defModifier, int splModifier, int spdModifier) {
+	public Pokemon(int dexNumber, String name, String type, int level, int hpModifier, int atkModifier, int defModifier, int splModifier, int spdModifier, int evolutionLevel) {
 
-		this.name = name;
+		this.dexNumber = dexNumber;
+
+        this.name = name;
 		this.type = type;
 
         
 
 		this.level = level;
         this.exp = 0;
+        this.evolutionLevel = evolutionLevel;
+
+		this.hpModifier = hpModifier;
+		this.atkModifier = atkModifier;
+		this.defModifier = defModifier;
+		this.splModifier = splModifier;
+		this.spdModifier = splModifier;
+
+        this.tempHP = getMaxHP();
+	}
+    public Pokemon(int dexNumber, String name, String type, int level, int hpModifier, int atkModifier, int defModifier, int splModifier, int spdModifier) {
+
+		this.dexNumber = dexNumber;
+
+        this.name = name;
+		this.type = type;
+
+        
+
+		this.level = level;
+        this.exp = 0;
+        this.evolutionLevel = 105;
 
 		this.hpModifier = hpModifier;
 		this.atkModifier = atkModifier;
@@ -148,22 +174,95 @@ public class Pokemon {
         return moves;
     }
 
+    public int getHPModifier() {
+
+        return this.hpModifier;
+    }
+
+    public int getATKModifier() {
+
+        return this.atkModifier;
+    }
+
+    public int getDEFModifier() {
+
+        return this.defModifier;
+    }
+
+    public int getSPLModifier() {
+
+        return this.splModifier;
+    }
+
+    public int getSPDModifier() {
+
+        return this.spdModifier;
+    }
+
+    public int getDexNumber() {
+
+        return this.dexNumber;
+    }
+
+    public int getEvoLevel() {
+
+        return this.evolutionLevel;
+    }
+
     public int expYield() {
 
         int expModifier = hpModifier+atkModifier + defModifier + spdModifier + spdModifier;
         return ((level*expModifier)/3) + (level/4);
     }
 
+    
+
     public void addEXP(int amount) {
 
         Text.say(this.name + " has earned " + amount + " EXP. Points!");
         this.exp = this.exp + amount;
 
-        if (this.exp > (level*level*level) && this.level < 100) {
+        while (this.exp >= (level*level*level) && this.level < 100) {
 
-            this.exp = 0;
-            this.level = this.level+1;
-            Text.say(this.name + " grew to Lv. " + this.level +"!");
+            levelUp();
+        }
+    }
+
+    public void levelUp() {
+        
+        this.exp = this.exp-(level*level*level);
+        this.level = this.level+1;
+        Text.say(this.name + " grew to Lv. " + this.level +"!");
+        Text.pauseNC();
+        if (this.level >= this.evolutionLevel) {
+            evolve();
+        }
+        
+    }
+
+    public void evolve() {
+
+        Text.say("What?");
+        Text.pauseNC();
+        boolean allowEvo = Text.pickOption(name + " is evolving!", "Allow", "Prevent");
+        if (allowEvo) {
+
+            Pokemon evoData = Data.getPokemon(this.dexNumber+1, level);
+            this.hpModifier = evoData.getHPModifier();
+            this.atkModifier = evoData.getATKModifier();
+            this.defModifier = evoData.getDEFModifier();
+            this.splModifier = evoData.getSPLModifier();
+            this.spdModifier = evoData.getSPDModifier();
+            
+
+            Text.say("Congratulations, your " + this.name + " evolved into a " + evoData.getName() + "!");
+            Text.pauseNC();
+            this.name = evoData.getName();
+            this.dexNumber = evoData.getDexNumber();
+
+            this.evolutionLevel = evoData.getEvoLevel();
+
+            
         }
     }
 
