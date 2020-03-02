@@ -187,7 +187,7 @@ public class Text {
     public static void clearScreen() {  
         System.out.print("\033[H\033[2J");  
         System.out.flush();  
-    }  
+    }  // Before Sanford ask me how this works, im just gonna cite StackOverflow as the author of this magical method.
 
     
 }

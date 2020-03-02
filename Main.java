@@ -21,7 +21,7 @@ class Main {
 
     public static void gameLoop(Player main) {
 
-        Pokemon playable = Data.getPokemon(9,45);
+        Pokemon playable = Data.getPokemon(9,10);
         playable.addMove(Data.getMove(10),0);
         main.addPokemonToTeam(playable,0);
 
@@ -37,7 +37,7 @@ class Main {
             } else if (location == 4) {
 
                 Text.say("Loading Debug Battle. . .");
-                main = loadBattleTest(main);
+                loadBattleTest(main);
             } else if (location == 5) {
             
                 Text.say("39 Lashing for " + main.getName());
@@ -50,7 +50,7 @@ class Main {
         }
     }
 
-    public static Player loadBattleTest(Player main) {
+    public static void loadBattleTest(Player main) {
 
         //Data sheet = new Data();
 
@@ -59,7 +59,7 @@ class Main {
 
         Battle demo = new Battle(main,opponet);
 
-        return demo.battleStart();
+        demo.battleStart();
     }
 }
 

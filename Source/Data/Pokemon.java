@@ -105,6 +105,11 @@ public class Pokemon {
 
         return this.type;
     }
+
+    public int getExp() {
+
+        return this.exp;
+    }
     
     public int getTempHP() {
 
@@ -141,9 +146,28 @@ public class Pokemon {
         return moves;
     }
 
+    public int expYield() {
+
+        int expModifier = hpModifier+atkModifier + defModifier + spdModifier + spdModifier;
+        return ((level*expModifier)/3) + (level/4);
+    }
+
+    public void addEXP(int amount) {
+
+        Text.say(this.name + " has earned " + amount + " EXP. Points!");
+        this.exp = this.exp + amount;
+
+        if (this.exp > (level*level*level) && this.level < 100) {
+
+            this.exp = 0;
+            this.level = this.level+1;
+            Text.say(this.name + " grew to Lv. " + this.level +"!");
+        }
+    }
+
     public void heal(int amount) {
 
-        this.tempHP = (this.tempHP > getMaxHP()) ? getMaxHP() : this.tempHP+amount;
+        this.tempHP = (this.tempHP+amount > getMaxHP()) ? getMaxHP() : this.tempHP+amount;
     }
 
     public void damage(int damage) {

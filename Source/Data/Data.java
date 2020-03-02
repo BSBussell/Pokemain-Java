@@ -479,7 +479,7 @@ public class Data {
                 gen.setName("Ben");
                 gen.setTeamSize(1);
                 gen.setPrize(100);
-                Pokemon first = getPokemon(6,40);
+                Pokemon first = getPokemon(6,10);
                 first.addMove(getMove(28),0);
                 gen.addPokemon(first);
                 return gen;
