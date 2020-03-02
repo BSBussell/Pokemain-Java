@@ -36,46 +36,46 @@ public class Data {
                 return new Pokemon(9, "Blastoise", "Water", level, 6,6,8,7,7);
                 
             case 10:
-                return new Pokemon(10, "Caterpie", "Bug", level, 2,2,2,2,2);
+                return new Pokemon(10, "Caterpie", "Bug", level, 2,2,2,2,2,7);
                 
             case 11:
-                return new Pokemon(11, "Metapod", "Bug", level, 1,1,9,1,1);
+                return new Pokemon(11, "Metapod", "Bug", level, 1,1,9,1,10);
                 
             case 12:
                 return new Pokemon(12, "Butterfree", "Bug", level, 7,6,6,6,6);
                 
             case 13:
-                return new Pokemon(13, "Weedle", "Bug", level, 3,4,3,3,3);
+                return new Pokemon(13, "Weedle", "Bug", level, 3,4,3,3,3,7);
                 
             case 14: 
-                return new Pokemon(14, "Kakuna", "Bug", level, 5,5,5,5,5);
+                return new Pokemon(14, "Kakuna", "Bug", level, 5,5,5,5,5,10);
                 
             case 15:
                 return new Pokemon(15, "Beedrill", "Bug", level, 6,8,6,6,7);
                 
             case 16: 
-                return new Pokemon(16, "Pidgey", "Flying", level, 3,3,3,3,3);
+                return new Pokemon(16, "Pidgey", "Flying", level, 3,3,3,3,3,18);
                 
             case 17:
-                return new Pokemon(17, "Pidgeotto", "Flying", level, 5,5,5,5,5);
+                return new Pokemon(17, "Pidgeotto", "Flying", level, 5,5,5,5,5,36);
                 
             case 18: 
                 return new Pokemon(18, "Pidgeot", "Flying", level, 7,7,7,7,7);
                 
             case 19: 
-                return new Pokemon(19, "Rattata", "Normal", level, 3,3,3,3,3);
+                return new Pokemon(19, "Rattata", "Normal", level, 3,3,3,3,3,20);
                 
             case 20:
                 return new Pokemon(20, "Raticate", "Normal", level, 5,5,5,5,5);
                 
             case 21: 
-                return new Pokemon(21, "Spearow", "Flying", level, 3,3,3,3,3);
+                return new Pokemon(21, "Spearow", "Flying", level, 3,3,3,3,3,20);
                 
             case 22: 
                 return new Pokemon(22, "Fearow", "Flying", level, 5,5,5,5,5);
                 
             case 23: 
-                return new Pokemon(23, "Ekans", "Poison", level, 3,3,3,3,3);
+                return new Pokemon(23, "Ekans", "Poison", level, 3,3,3,3,3,22);
                 
             case 24:
                 return new Pokemon(24, "Arbok", "Poison", level, 5,5,5,5,5);
@@ -87,13 +87,13 @@ public class Data {
                 return new Pokemon(26, "Raichu", "Electric", level, 5,5,5,5,5);
                 
             case 27: 
-                return new Pokemon(27, "Sandshrew", "Ground", level, 3,3,3,3,3);
+                return new Pokemon(27, "Sandshrew", "Ground", level, 3,3,3,3,3,22);
                 
             case 28: 
                 return new Pokemon(28, "Sandslash", "Ground", level, 5,5,5,5,5);
                 
             case 29: 
-                return new Pokemon(29, "Nidoran(♀)", "Poison", level, 3,3,3,3,3);
+                return new Pokemon(29, "Nidoran(♀)", "Poison", level, 3,3,3,3,3,16);
                 
             case 30: 
                 return new Pokemon(30, "Nidorina", "Poison", level, 5,5,5,5,5);
@@ -102,7 +102,7 @@ public class Data {
                 return new Pokemon(31, "Nidoqueen", "Poison", level, 7,7,7,7,7);
                 
             case 32: 
-                return new Pokemon(32, "Nidoran(♂)", "Poison", level, 3,3,3,3,3);
+                return new Pokemon(32, "Nidoran(♂)", "Poison", level, 3,3,3,3,3,16);
                 
             case 33:
                 return new Pokemon(33, "Nidorino", "Poison", level, 5,5,5,5,5);
@@ -508,7 +508,9 @@ public class Data {
 
     public static Trainer genTrainer(int level) {
 
+        String[] names = {"Abraham","Alex"};
         Trainer gen = new Trainer();
+        gen.setName(names[0]);
         return gen;
     }
 
