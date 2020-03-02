@@ -282,16 +282,16 @@ public class Data {
                 return new Pokemon("Cloyster", "Water", level, 5,5,5,5,5);
 
             case 92:
-                return new Pokemon("Gastly", "Ghost", level, 3,3,3,3,3);
+                return new Pokemon("Gastly", "Ghost", level, 3,4,3,6,5);
 
             case 93:
-                return new Pokemon("Haunter", "Ghost", level, 5,5,5,5,5);
+                return new Pokemon("Haunter", "Ghost", level, 5,6,5,8,7);
 
             case 94: 
-                return new Pokemon("Gengar", "Ghost", level, 7,7,7,7,7);
+                return new Pokemon("Gengar", "Ghost", level, 7,8,7,10,9);
             
             case 95:
-                return new Pokemon("Onix", "Rock", level, 3,3,3,3,3);
+                return new Pokemon("Onix", "Rock", level, 6,6,7,2,5);
 
             case 96: 
                 return new Pokemon("Drowzee", "Psychic", level, 3,3,3,3,3);
@@ -303,19 +303,19 @@ public class Data {
                 return new Pokemon("Krabby", "Water", level, 3,3,3,3,3);
 
             case 99:
-                return new Pokemon("Kingler", "Water", level, 5,5,5,5,5);
+                return new Pokemon("Kingler", "Water", level, 6,7,5,4,6);
 
             case 100:
                 return new Pokemon("Voltorb", "Electric", level, 3,3,3,3,3);
 
             case 101:
-                return new Pokemon("Electrode", "Electric", level, 5,5,5,5,5);
+                return new Pokemon("Electrode", "Electric", level, 3,7,3,6,4);
 
             case 102:
-                return new Pokemon("Exeggcute", "Grass", level, 3,3,3,3,3);
+                return new Pokemon("Exeggcute", "Grass", level, 4,3,4,5,2);
                 
             case 103:
-                return new Pokemon("Exeggcutor", "Grass", level, 5,5,5,5,5);
+                return new Pokemon("Exeggcutor", "Grass", level, 7,6,7,8,4);
 
             case 104:
                 return new Pokemon("Cubone", "Ground", level, 3,3,3,3,3);
@@ -345,10 +345,10 @@ public class Data {
                 return new Pokemon("Rhydon", "Ground", level, 5,5,5,5,5);
                 
             case 113:
-                return new Pokemon("Chansey", "Normal", level, 3,3,3,3,3);
+                return new Pokemon("Chansey", "Normal", level, 15,3,3,3,3);
                 
             case 114:
-                return new Pokemon("Tangela", "Grass", level, 3,3,3,3,3);
+                return new Pokemon("Tangela", "Grass", level, 6,4,3,3,4);
 
             case 115:
                 return new Pokemon("Kangaskhan", "Normal", level, 7,7,7,7,7);
@@ -384,7 +384,7 @@ public class Data {
                 return new Pokemon("Electabuzz", "Electric", level, 5,5,5,5,5);
                 
             case 126:
-                return new Pokemon("Magmar", "Fire", level, 5,5,5,5,5);
+                return new Pokemon("Magmar", "Fire", level, 5,6,6,5,5);
                 
             case 127:
                 return new Pokemon("Pinsir", "Bug", level, 5,5,5,5,5);
@@ -396,7 +396,7 @@ public class Data {
                 return new Pokemon("Magikarp", "Water", level, 1,1,1,1,1);
 
             case 130:
-                return new Pokemon("Gyrados", "Water", level, 9,9,9,9,9);
+                return new Pokemon("Gyrados", "Water", level, 8,9,8,9,9);
 
             case 131:
                 return new Pokemon("Lapras", "Water", level, 7,7,7,7,7);
