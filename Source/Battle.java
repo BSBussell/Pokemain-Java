@@ -370,9 +370,18 @@ public class Battle {
 
         double randomMultiplier = 0.85 + (1.0 - 0.85) * rand.nextDouble();
         double stabBonus = (attacker.getType().equals(move.getType())) ? 1.5 : 1;
+        double typeBonus = Data.typeEffectiveness(attacker.getType(), defender.getType());
 
         double damage = (((levelMultiplier * move.getPower() * statsMultiplier) / 50) + 2)
-                * (stabBonus * randomMultiplier);
+                * (stabBonus * randomMultiplier * typeBonus);
+
+        if (typeBonus == 0.0) {
+            Text.say("It had no effect.");
+        } else if (typeBonus == 0.5) {
+            Text.say("It was not very effective.");
+        } else if (typeBonus == 2.0) {
+            Text.say("It was super effective.");
+        }
 
         return (int) Math.floor(damage);
     }

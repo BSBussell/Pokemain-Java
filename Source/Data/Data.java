@@ -39,19 +39,19 @@ public class Data {
                 return new Pokemon("Caterpie", "Bug", level, 2,2,2,2,2);
                 
             case 11:
-                return new Pokemon("Metapod", "Bug", level, 4,4,4,4,4);
+                return new Pokemon("Metapod", "Bug", level, 1,1,9,1,1);
                 
             case 12:
-                return new Pokemon("Butterfree", "Bug", level, 6,6,6,6,6);
+                return new Pokemon("Butterfree", "Bug", level, 7,6,6,6,6);
                 
             case 13:
-                return new Pokemon("Weedle", "Bug", level, 3,3,3,3,3);
+                return new Pokemon("Weedle", "Bug", level, 3,4,3,3,3);
                 
             case 14: 
                 return new Pokemon("Kakuna", "Bug", level, 5,5,5,5,5);
                 
             case 15:
-                return new Pokemon("Beedrill", "Bug", level, 7,7,7,7,7);
+                return new Pokemon("Beedrill", "Bug", level, 6,8,6,6,7);
                 
             case 16: 
                 return new Pokemon("Pidgey", "Flying", level, 3,3,3,3,3);
@@ -111,16 +111,16 @@ public class Data {
                 return new Pokemon("Nidoking", "Poison", level, 7,7,7,7,7);
                 
             case 35:
-                return new Pokemon("Clefairy", "Normal", level, 3,3,3,3,3);
+                return new Pokemon("Clefairy", "Normal", level, 7,4,4,4,4);
                 
             case 36:
-                return new Pokemon("Clefable", "Normal", level, 5,5,5,5,5);
+                return new Pokemon("Clefable", "Normal", level, 9,8,8,8,6);
                 
             case 37: 
                 return new Pokemon("Vulpix", "Fire", level, 3,3,3,3,3);
                 
             case 38:
-                return new Pokemon("Ninetales", "Fire", level, 5,5,5,5,5);
+                return new Pokemon("Ninetales", "Fire", level, 6,8,6,7,7);
                 
             case 39:
                 return new Pokemon("Jigglypuff", "Normal", level, 3,3,3,3,3);
@@ -156,10 +156,10 @@ public class Data {
                 return new Pokemon("Venomoth", "Bug", level, 5,5,5,5,5);
                 
             case 50: 
-                return new Pokemon("Diglett", "Ground", level, 3,3,3,3,3);
+                return new Pokemon("Diglett", "Ground", level, 3,4,4,3,2);
                 
             case 51: 
-                return new Pokemon("Dugtrio", "Ground", level, 5,5,5,5,5);
+                return new Pokemon("Dugtrio", "Ground", level, 5,6,6,5,4);
                 
             case 52: 
                 return new Pokemon("Meowth", "Normal", level, 3,3,3,3,3);
@@ -168,22 +168,22 @@ public class Data {
                 return new Pokemon("Persian", "Normal", level, 5,5,5,5,5);
                 
             case 54: 
-                return new Pokemon("Psyduck", "Water", level, 3,3,3,3,3);
+                return new Pokemon("Psyduck", "Water", level, 3,3,3,5,3);
                 
             case 55:
-                return new Pokemon("Golduck", "Water", level, 5,5,5,5,5);
+                return new Pokemon("Golduck", "Water", level, 7,5,5,8,5);
                 
             case 56:
-                return new Pokemon("Mankey", "Fighting", level, 3,3,3,3,3);
+                return new Pokemon("Mankey", "Fighting", level, 4,5,3,3,5);
                 
             case 57:
-                return new Pokemon("Primeape", "Fighting", level, 5,5,5,5,5);
+                return new Pokemon("Primeape", "Fighting", level, 5,8,5,5,6);
                 
             case 58:
-                return new Pokemon("Growlithe", "Fire", level, 3,3,3,3,3);
+                return new Pokemon("Growlithe", "Fire", level, 3,3,3,4,3);
                 
             case 59:
-                return new Pokemon("Arcanine", "Fire", level, 5,5,5,5,5);
+                return new Pokemon("Arcanine", "Fire", level, 7,6,5,7,5);
                 
             case 60:
                 return new Pokemon("Poliwag", "Water", level, 3,3,3,3,3);
@@ -195,7 +195,7 @@ public class Data {
                 return new Pokemon("Poliwrath", "Water", level, 7,7,7,7,7);
                 
             case 63:
-                return new Pokemon("Abra", "Psychic", level, 3,3,3,3,3);
+                return new Pokemon("Abra", "Psychic", level, 3,3,3,3,5);
                 
             case 64: 
                 return new Pokemon("Kadabra", "Psychic", level, 5,5,5,5,5);
@@ -589,7 +589,7 @@ public class Data {
                 return new Move("Cut", "Normal", 50, 95, true);
             
             case 17: 
-                return new Move("Dragon Rage","Dragon", 40,100,false);
+                return new Move("Dragon Rage","Dragon", 40, 100, false);
             
             case 18:
                 return new Move("Dig", "Ground", 80, 100, true);
@@ -631,10 +631,72 @@ public class Data {
             case 28: 
                 return new Move("Explosion", "Normal", 250, 100, true);
                 //user faints
-/*
-            case 28:
+
+            case 29:
+                return new Move("Fire Blast", "Fire", 110, 85, false);
+                //May Burn
+
+            case 30: 
+                return new Move("Fire Punch", "Fire", 75, 100, true);
+                //May Brun
+
+            case 31:
+                return new Move("Fire Spin", "Fire", 35, 85, false);
+                //Complicated shit
+            
+            case 32: 
+                return new Move("Fissure", "Ground", 1000000, 30, true);
+                //One hit kill if hit, but can't hit pokemon that are faster
+            
+            case 33:
+                return new Move("Flamethrower", "Fire", 90, 100, false);
+                //May Burn
+
+            case 34:
+                return new Move("Fly", "Flying", 90, 95, true);
+
+            case 35:
+                return new Move("Fury Attack", "Normal", 15, 85, true);
+                //hits 2-5 times
+            
+            case 36: 
+                return new Move("Fury Swipes", "Normal",18, 80, true);
+
+            case 37:
+                return new Move("Guillotine, Normal", 100000000000000, 30, true);
+            
+            case 38:
+                return new Move("Gust", "Flying", 40, 100, false);
+            
+            case 39:
+                return new Move("Headbutt", "Normal", 70, 100, true);
+            
+            case 40: 
+                return new Move("High Jump Kick", "Fighting", 130, 90, true);
+            
+            case 41:
+                return new Move("Horn Attack", "Normal", 65, 100);
+            
+            case 42:
+                return new Move("Hydro Pump", "Water", 110, 80);
+            
+            case 43:
+                return new Move("Hyper Bean", "Normal", 150, 90);
+                //orginally Hyper Beam
+            
+            case 44:
+                return new Move("Hyper Fang", "Normal", 80, 90);
+            /*
+            case 45:
                 return new Move("")
-*/
+            */
+
+
+
+
+
+
+
             
                 
                 
@@ -759,6 +821,8 @@ public class Data {
             case "Normal":
                 noEffect.add("Ghost");
                 notVeryEffect.add("Rock");
+                
+                break;
             
             case "Fire":
                 notVeryEffect.add("Fire");
@@ -769,7 +833,9 @@ public class Data {
                 superEffect.add("Grass");
                 superEffect.add("Ice");
                 superEffect.add("Bug");
-                    
+                
+                break;
+
             case "Water":
                 notVeryEffect.add("Water");
                 notVeryEffect.add("Grass");
@@ -778,6 +844,8 @@ public class Data {
                 superEffect.add("Fire");
                 superEffect.add("Ground");
                 superEffect.add("Rock");
+                
+                break;
                 
             case "Electric":
                 noEffect.add("Ground");
@@ -788,6 +856,8 @@ public class Data {
 
                 superEffect.add("Water");
                 superEffect.add("Flying");
+                
+                break;
 
             case "Grass":
                 notVeryEffect.add("Fire");
@@ -801,29 +871,116 @@ public class Data {
                 superEffect.add("Ground");
                 superEffect.add("Rock");
                 
+                break;
                 
             case "Ice":
+                notVeryEffect.add("Water");
+                notVeryEffect.add("Ice");
+                
+                superEffect.add("Grass");
+                superEffect.add("Ground");
+                superEffect.add("Flying");
+                superEffect.add("Dragon");
+                
+                break;
+                
                 
             case "Fighting":
+                noEffect.add("Ghost");
+
+                notVeryEffect.add("Poison");
+                notVeryEffect.add("Flying");
+                notVeryEffect.add("Psychic");
+                notVeryEffect.add("Bug");
+
+                superEffect.add("Normal");
+                superEffect.add("Ice");
+                superEffect.add("Rock");
+                
+                break;
                 
             case "Poison":
+                notVeryEffect.add("Poison");
+                notVeryEffect.add("Ground");
+                notVeryEffect.add("Rock");
+                notVeryEffect.add("Ghost");
+
+                superEffect.add("Grass");
+                superEffect.add("Bug");
+                
+                break;
                 
             case "Ground":
+                noEffect.add("Flying");
+
+                notVeryEffect.add("Bug");
+                notVeryEfffect.add("Grass");
+
+                superEffect.add("Fire");
+                superEffect.add("Electric");
+                superEffect.add("Poison");
+                superEffect.add("Rock");
                 
-            case "Fly":
+                break;
+                
+            case "Flying":
+                notVeryEffect.add("Electric");
+                notVeryEffect.add("Bug");
+
+                superEffect.add("Grass");
+                superEffect.add("Fighting");
+                superEffect.add("Bug");
                 
             case "Psychic":
+                notVeryEffect.add("Psychic");
+
+                superEffect.add("Fighting");
+                superEffect.add("Poison");
                 
+                break;
+
             case "Bug":
+                notVeryEffect.add("Fire");
+                notVeryEffect.add("Fighting");
+                notVeryEffect.add("Flying");
+                
+                superEffect.add("Grass");
+                superEffect.add("Poison");
+                superEffect.add("Psychic");
+                
+                break;
                 
             case "Rock":
+                notVeryEffect.add("Fighting");
+                notVeryEffect.add("Ground");
+
+                superEffect.add("Fire");
+                superEffect.add("Ice");
+                superEffect.add("Flying");
+                
+                break;
                 
             case "Ghost":
-                
+                noEffect.add("Normal");
+                noEffect.add("Psychic");
+
+                superEffect.add("Ghost");
+                break;
+
             case "Dragon":
+                superEffect.add("Dragon");
                 
+                break;
         }
-        return 0.0;
+        if (noEffect.contains(typeDefender)) {
+            return 0.0;
+        } else if (notVeryEffect.contains(typeDefender)) {
+            return 0.5;
+        } else if (superEffect.contains(typeDefender)) {
+            return 2.0;
+        } else {
+            return 1.0;
+        }
     }
 }
 

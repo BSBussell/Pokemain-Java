@@ -28,7 +28,13 @@ public class Move {
     public Move() {}
 
     //other shit
-    public Move(String name, String type, String stat) {}
+    public Move(String name, String type, String stat) {
+
+        this.name = name;
+        this.type = type;
+
+        this.statToModify = stat;
+    }
     
     public String getName() {
         
