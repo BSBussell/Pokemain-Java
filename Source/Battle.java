@@ -42,20 +42,20 @@ public class Battle {
     public Battle(Player you, Pokemon wild) {
 
         this.you = you;
-        this.trainer = new Trainer()
+        this.opponet = new Trainer();
 
-        this.trainer.setName("a Wild " + wild.getName());
-        this.trainer.setTeamSize(1);
-        this.trainer.setPrize(0);
-        this.trainer.addPokemon(wild);
+        this.opponet.setName("a Wild " + wild.getName());
+        this.opponet.setTeamSize(1);
+        this.opponet.setPrize(0);
+        this.opponet.addPokemon(wild);
 
         this.isTrainer = false;
 
         this.playerName = you.getName();
-        this.trainerName = this.trainer.getName();
+        this.trainerName = this.opponet.getName();
 
         this.playerTeam = you.getTeam();
-        this.trainerTeam = this.trainer.getTeam();
+        this.trainerTeam = this.opponet.getTeam();
 
         this.playerActivePokemon = playerTeam.get(0);
         this.trainerActivePokemon = trainerTeam.get(0);
@@ -64,12 +64,19 @@ public class Battle {
     public void battleStart() {
 
         Text.clearScreen();
-        Text.say(playerName + " V.S. " + trainerName);
-        Text.pauseNC();
+        
 
-        Text.say(trainerName + " Sent out " + playerActivePokemon.getName());
-        Text.pauseNC();
-        Text.say(playerName + " Sends out " + trainerActivePokemon.getName());
+        if (isTrainer) {
+            Text.say("You are challenged by trainer "+ trainerName);
+            Text.pauseNC();
+            Text.say(trainerName + " Sent out " + trainerActivePokemon.getName());
+            Text.pauseNC();
+        } else {
+            Text.say(trainerName + " appeared!");
+            Text.pauseNC();
+
+        }
+        Text.say(playerName + " Sends out " + playerActivePokemon.getName());
 
         Text.pauseNC();
         Text.clearScreen();

@@ -10,6 +10,7 @@ class Main {
 
         Player main = new Player(name,500);
         
+        Text.clearScreen();
         Text.say("Well " + name + ", Welcome to the world of Pokemon...");
         Text.pause();
 
@@ -27,38 +28,52 @@ class Main {
 
 
         while(true) {
-            String[] places = new String[]{"Wild", "Trainer", "PokeCenter","DeBug","N-Word", "STats"};
+            String[] places = new String[]{"Wild-Debug", "Trainer-Debug", "PokeCenter","N-Word", "Stats"};
             int location = Text.menu("Where would you like to go?", places);
-            if (location == 3) {
+            if (location == 1) {
+
+                Text.say("Loading Debug Battle. . .");
+                Text.pause();
+                loadWildBattleTest(main);
+            } else if (location == 2) {
+                
+                Text.say("Loading Debug Battle. . .");
+                Text.pause();
+                loadTrainerBattleTest(main);
+            } else if (location == 3) {
 
                 main.healTeam();
                 Text.say("Pokemon have been Healed.");
                 Text.pause();
             } else if (location == 4) {
 
-                Text.say("Loading Debug Battle. . .");
-                loadBattleTest(main);
-            } else if (location == 5) {
-            
                 Text.say("39 Lashing for " + main.getName());
                 Text.pause();
-            } else if (location == 6) {
-
-                Text.say(""+main.getTeam().get(0).getTempHP());
-                Text.pause();
-            }
+            } else if (location == 5) {
+            
+                
+                for (Pokemon idv : main.getTeam()) {
+                    Text.say(idv.toString());
+                    Text.pause();
+                }
+            } 
         }
     }
 
-    public static void loadBattleTest(Player main) {
+    public static void loadWildBattleTest(Player main) {
 
-        //Data sheet = new Data();
+        Pokemon first = Data.getPokemon(6,10);
+        first.addMove(Data.getMove(28),0);
 
-        
+        Battle demo = new Battle(main, first);
+        demo.battleStart();
+    }
+
+    public static void loadTrainerBattleTest(Player main) {
+
         Trainer opponet = Data.getTrainer(-1);
 
-        Battle demo = new Battle(main,opponet);
-
+        Battle demo = new Battle(main, opponet);
         demo.battleStart();
     }
 }

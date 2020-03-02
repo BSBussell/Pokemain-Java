@@ -177,7 +177,14 @@ public class Pokemon {
 
     public String toString() {
 
-        return "Species: " + name + "\nLevel: " + level;
+        return "Species. : " + name + 
+               "\nLevel. : " + level +
+               "\nEXP.   : " + exp + "/" + (level*level*level) +
+               "\nHP     : " + tempHP + "/" + getMaxHP() +
+               "\nATK.   : " + getActualAttack() + 
+               "\nDEF.   : " + getActualDefense() +
+               "\nSPL.   : " + getActualSpecial() +
+               "\nSPD.   : " + getActualSpeed() + "\n";
     }
 
     
