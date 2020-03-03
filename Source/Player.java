@@ -8,7 +8,7 @@ public class Player {
     private ArrayList<Pokemon> pc = new ArrayList<Pokemon>();
     private ArrayList<Pokemon> dex = new ArrayList<Pokemon>();
 
-    private int[] bag = new int[] {0,0,0,0};
+    private int[] bag = new int[] {5,0,0,0};
     
     private int leadersBeat;
     private int cash;
@@ -46,6 +46,15 @@ public class Player {
         }
     }
 
+    public void addPokemonNext(Pokemon creature) {
+
+        if (team.size() > 6)
+            pc.add(creature);
+        else
+            team.add(creature);
+
+    }
+
     public void addPokemonToTeam(Pokemon creature, int position) {
 
         if (team.size() >= position+1) {
@@ -59,7 +68,7 @@ public class Player {
    
     }
 
-    public void movePokemonToPC(int pcIndex, int teamIndex) {
+    public void swapPokemon(int pcIndex, int teamIndex) {
 
         if (team.size() <= teamIndex+1) {
 

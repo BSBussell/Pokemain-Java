@@ -5,12 +5,13 @@ import java.lang.Math;
 public class Battle {
 
     private Player you;
-    private Trainer opponet;
+    private Trainer opponent;
 
     private String playerName;
     private String trainerName;
 
     private boolean isTrainer = true;
+    private boolean caught = false;
     private boolean escape = false;
 
     private ArrayList<Pokemon> playerTeam = new ArrayList<Pokemon>();
@@ -24,16 +25,16 @@ public class Battle {
 
     private int menuLocation = 0;
 
-    public Battle(Player you, Trainer opponet) {
+    public Battle(Player you, Trainer opponent) {
 
         this.you = you;
-        this.opponet = opponet;
+        this.opponent = opponent;
 
         this.playerName = you.getName();
-        this.trainerName = opponet.getName();
+        this.trainerName = opponent.getName();
 
         this.playerTeam = you.getTeam();
-        this.trainerTeam = opponet.getTeam();
+        this.trainerTeam = opponent.getTeam();
 
         this.playerActivePokemon = playerTeam.get(0);
         this.trainerActivePokemon = trainerTeam.get(0);
@@ -43,20 +44,20 @@ public class Battle {
     public Battle(Player you, Pokemon wild) {
 
         this.you = you;
-        this.opponet = new Trainer();
+        this.opponent = new Trainer();
 
-        this.opponet.setName("a Wild " + wild.getName());
-        this.opponet.setTeamSize(1);
-        this.opponet.setPrize(0);
-        this.opponet.addPokemon(wild);
+        this.opponent.setName("a Wild " + wild.getName());
+        this.opponent.setTeamSize(1);
+        this.opponent.setPrize(0);
+        this.opponent.addPokemon(wild);
 
         this.isTrainer = false;
 
         this.playerName = you.getName();
-        this.trainerName = this.opponet.getName();
+        this.trainerName = this.opponent.getName();
 
         this.playerTeam = you.getTeam();
-        this.trainerTeam = this.opponet.getTeam();
+        this.trainerTeam = this.opponent.getTeam();
 
         this.playerActivePokemon = playerTeam.get(0);
         this.trainerActivePokemon = trainerTeam.get(0);
@@ -87,7 +88,7 @@ public class Battle {
 
     public void battleLoop() {
 
-        while (trainerActivePokemon.getTempHP() > 0 && playerActivePokemon.getTempHP() > 0 ) {
+        while (true) {
 
             battleDraw();
 
@@ -119,17 +120,17 @@ public class Battle {
                 Text.pauseNC();
                 return;
             }
+            if (caught) {
+
+                return;
+            }
 
             if (escape) {
 
                 return;
             }
         }
-        
-        
-        Text.say("I know it is possible to reach this point somehow. However right now I have a headache\n"+
-                    "and i'm in so many layers of abstraction that I'm kind of losing track. . .");
-        return;
+
     }
 
     public void battleDraw() {
@@ -181,9 +182,27 @@ public class Battle {
             int bagSelection = Text.drawBagSpace(you.getBag());
 
             if (bagSelection!=5)
-                if
+                if (you.getBag()[bagSelection-1] <= 0) {
 
-            Text.pause();
+                    Text.say("You are out of this item");
+                    Text.pauseNC();
+
+                } else if (catchAttempt(bagSelection)) {
+
+                    Text.say("You used a ball on " + trainerActivePokemon.getName());
+                    Text.pauseNC();
+                    you.addPokemonNext(trainerActivePokemon);
+                    Text.say("Gotcha, the " + trainerActivePokemon.getName() + " was caught!");
+                    Text.pause();
+                    caught = true;
+                } else {
+                    Text.say("You used a ball on " + trainerActivePokemon.getName());
+                    Text.say("It did not work.");
+                    Text.pauseNC();
+                    opponetAttack();
+                }
+
+
             menuLocation = 0;
             break;
         case 3:
