@@ -177,7 +177,12 @@ public class Battle {
             menuLocation = (menuLocation == 5) ? 0 : menuLocation + 10;
             break;
         case 2:
-            Text.say("WIP");
+
+            int bagSelection = Text.drawBagSpace(you.getBag());
+
+            if (bagSelection!=5)
+                if
+
             Text.pause();
             menuLocation = 0;
             break;
@@ -196,7 +201,7 @@ public class Battle {
                 Text.say("PLease chill guys I can only work so fast...");
                 int top = this.playerActivePokemon.getActualSpeed()*28;
                 int chance = (top/this.trainerActivePokemon.getActualSpeed())+30;
-                if (chance > 80) {
+                if (chance > 60) {
                     Text.say("You got away safely.");
                     Text.pause();
                     escape = true;
@@ -251,7 +256,45 @@ public class Battle {
             menuLocation = 0;
             break;
 
+
+
+
         }
+
+    }
+
+    public boolean catchAttempt(int ball) {
+        Random rand = new Random();
+
+        if (ball == 4)
+            return true;
+
+        double ballOdds;
+
+        switch(ball) {
+            case 1:
+                ballOdds = 1.0;
+                break;
+
+            case 2:
+                ballOdds = 1.5;
+                break;
+            default:
+                ballOdds = 2.0;
+                break;
+        }
+
+        double topLeft = 3.0*(double)trainerActivePokemon.getMaxHP()-2.0*(double)trainerActivePokemon.getTempHP();
+        double topRight = 127.0 * ballOdds;
+        double bottom = 3.0*(double)trainerActivePokemon.getMaxHP();
+
+        double p1 = (topLeft*topRight)/bottom;
+
+        double roll = (double)rand.nextInt(100)+1;
+
+        return (roll<=p1);
+
+
 
     }
 

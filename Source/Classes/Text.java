@@ -128,7 +128,7 @@ public class Text {
         return Integer.parseInt(response);  
     }
 
-    public static int drawBagSpace(String[] items) {
+    public static int drawBagSpace(int[] items) {
 
         System.out.println("*========================*");
         System.out.println("= (1)Poke Ball "  + "x" + items[0]+"=");

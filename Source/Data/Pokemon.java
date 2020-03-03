@@ -199,6 +199,11 @@ public class Pokemon {
         return this.spdModifier;
     }
 
+    public int getModifierSum() {
+
+	    return this.hpModifier + this.atkModifier+ this.defModifier + this.spdModifier + this.splModifier;
+    }
+
     public int getDexNumber() {
 
         return this.dexNumber;
@@ -211,7 +216,7 @@ public class Pokemon {
 
     public int expYield() {
 
-        int expModifier = hpModifier+atkModifier + defModifier + spdModifier + spdModifier;
+        int expModifier =this.getModifierSum();
         return ((level*expModifier)/3) + (level/4);
     }
 
