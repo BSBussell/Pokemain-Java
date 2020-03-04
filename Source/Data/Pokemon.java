@@ -88,35 +88,40 @@ public class Pokemon {
         }
     }
 
-    public void learnMove(int id) {
+    public void learnMove(Move learning) {
 
-        Move learning = Data.getMove(id);
-
+        
         Text.say(name + "Wants to learn " + learning.getName() + "...");
-        if (moves.size()>=4) {
-			Text.say("But " +name+ " already knows four moves...");
+        if (this.moves.size()>=4) {
+			Text.say("But " +this.name+ " already knows four moves...");
             Text.pause();
             boolean wantToLearn = Text.pickOption("Does " + name + " want to forget a old move and learn " + learning.getName()+"?","Yes, learn a new move", "No, keep old moves");
 
             if (wantToLearn==false) {
-                Text.say(name+ " did not learn the move " + learning.getName() +". ");
+                Text.say(this.name+ " did not learn the move " + learning.getName() +". ");
                 Text.pause();
                 return;
+            } else {
+                String[] preExisting = new String[]{moves.get(0), moves.get(1), moves.get(2), moves.get(3)};
+                int position = Text.menu("Pick a move to forget: ", preExisting) - 1;
+                
+                System.out.println(name + " learned " + learning.getName());
+                addMove(learning, position);
             }
         } else {
             
             System.out.println(name + " learned " + learning.getName());
-            addMove(learning, moves.size()+1);
+            addMove(learning, -1);
         }
         
     }
     
     public void addMove(Move name, int pos) {
         
-        if (moves.size() > pos)
-            moves.set(pos, name);
+        if (pos == -1)
+            moves.add(name); 
         else
-            moves.add(name);
+            moves.set(pos, name);
     }
 
     public String getName() {
@@ -242,7 +247,13 @@ public class Pokemon {
         if (this.level >= this.evolutionLevel) {
             evolve();
         }
-        
+
+        Move possible = Data.learnSet(this.type, this.level);
+        if (!possible.getName().equals("Null")) {
+            
+            learnMove(possible);
+        }
+
     }
 
     public void evolve() {

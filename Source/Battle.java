@@ -90,7 +90,7 @@ public class Battle {
 
         while (true) {
 
-            battleDraw();
+            battleDraw(); // This is where all the battle logic is kept
 
             if (trainerActivePokemon.getTempHP() < 0) {
 
@@ -147,42 +147,48 @@ public class Battle {
 
         switch (menuLocation) {
 
-        case 0:
-            menuLocation = Text.drawMainBattleMenu();
-            break;
-        case 1:
-            ArrayList<Move> moveList = new ArrayList<Move>();
-            moveList = playerActivePokemon.getMoves();
-            String move1, move2, move3, move4;
-            if (moveList.size() > 0)
-                move1 = moveList.get(0).getName();
-            else
-                move1 = "~~~~";
-            if (moveList.size() > 1)
-                move2 = moveList.get(1).getName();
-            else
-                move2 = "~~~~";
-            if (moveList.size() > 2)
-                move3 = moveList.get(2).getName();
-            else
-                move3 = "~~~~";
-            if (moveList.size() > 3)
-                move4 = moveList.get(3).getName();
-            else
-                move4 = "~~~~";
+            case 0:
+                menuLocation = Text.drawMainBattleMenu();
+                break;
+            case 1:
+                ArrayList<Move> moveList = new ArrayList<Move>();
+                moveList = playerActivePokemon.getMoves();
+                String move1, move2, move3, move4;
+                if (moveList.size() > 0)
+                    move1 = moveList.get(0).getName();
+                else
+                    move1 = "~~~~";
+                if (moveList.size() > 1)
+                    move2 = moveList.get(1).getName();
+                else
+                    move2 = "~~~~";
+                if (moveList.size() > 2)
+                    move3 = moveList.get(2).getName();
+                else
+                    move3 = "~~~~";
+                if (moveList.size() > 3)
+                    move4 = moveList.get(3).getName();
+                else
+                    move4 = "~~~~";
 
-            menuLocation = Text.drawAttackMenu(move1, move2, move3, move4);
-            if (moveList.size() <= menuLocation - 1 && menuLocation != 5) {
-                menuLocation = -9;
-            }
-            menuLocation = (menuLocation == 5) ? 0 : menuLocation + 10;
-            break;
+                menuLocation = Text.drawAttackMenu(move1, move2, move3, move4);
+                if (moveList.size() <= menuLocation - 1 && menuLocation != 5) {
+                    menuLocation = -9;
+                }
+                menuLocation = (menuLocation == 5) ? 0 : menuLocation + 10;
+                break;
         case 2:
 
             int bagSelection = Text.drawBagSpace(you.getBag());
 
             if (bagSelection!=5)
-                if (you.getBag()[bagSelection-1] <= 0) {
+                if (isTrainer) {
+
+                    Text.say("You can't use this on a trainers Pokemon!");
+                    Text.pause();
+                    break;
+                
+                } else if (you.getBag()[bagSelection-1] <= 0) {
 
                     Text.say("You are out of this item");
                     Text.pauseNC();
@@ -317,11 +323,41 @@ public class Battle {
 
     }
 
+    public void playerAttack() {
+        Text.say(playerActivePokemon.getName() + " used " + playerAttack.getName());
+        int damageDone = calculateDamage(playerActivePokemon, trainerActivePokemon, playerAttack);
+
+        double typeBonus = Data.typeEffectiveness(playerAttack.getType(), trainerActivePokemon.getType());
+        
+        if (typeBonus == 0.0) {
+            Text.say("It had no effect.");
+        } else if (typeBonus == 0.5) {
+            Text.say("It was not very effective.");
+        } else if (typeBonus == 2.0) {
+            Text.say("It was super effective.");
+        }
+
+        trainerActivePokemon.damage(damageDone);
+        Text.pauseNC();
+        moveEffects(playerActivePokemon, trainerActivePokemon,playerAttack);   
+
+    }
+
     public void opponetAttack() {
 
         Move opponetAttack = enemyMove(trainerActivePokemon, playerActivePokemon);
         Text.say(trainerActivePokemon.getName() + " used " + opponetAttack.getName());
         int opponetDamage = calculateDamage(trainerActivePokemon, playerActivePokemon, opponetAttack);
+
+        typeBonus = Data.typeEffectiveness(opponetAttack.getType(), playerActivePokemon.getType());
+        
+        if (typeBonus == 0.0) {
+            Text.say("It had no effect.");
+        } else if (typeBonus == 0.5) {
+            Text.say("It was not very effective.");
+        } else if (typeBonus == 2.0) {
+            Text.say("It was super effective.");
+        }
 
         playerActivePokemon.damage(opponetDamage);
         Text.pauseNC();
@@ -332,22 +368,7 @@ public class Battle {
         
         if (playerActivePokemon.getActualSpeed() > trainerActivePokemon.getActualSpeed()) {
 
-            Text.say(playerActivePokemon.getName() + " used " + playerAttack.getName());
-            int damageDone = calculateDamage(playerActivePokemon, trainerActivePokemon, playerAttack);
-
-            double typeBonus = Data.typeEffectiveness(playerAttack.getType(), trainerActivePokemon.getType());
-            if (typeBonus == 0.0) {
-                Text.say("It had no effect.");
-            } else if (typeBonus == 0.5) {
-                Text.say("It was not very effective.");
-            } else if (typeBonus == 2.0) {
-                Text.say("It was super effective.");
-            }
-
-            trainerActivePokemon.damage(damageDone);
-            Text.pauseNC();
-            moveEffects(playerActivePokemon, trainerActivePokemon,playerAttack);
-
+            playerAttack();
             
 
             if (playerActivePokemon.getTempHP() <= 0 || trainerActivePokemon.getTempHP() <= 0) {
@@ -355,64 +376,21 @@ public class Battle {
             }
 
             
-            Text.say(trainerActivePokemon.getName() + " used " + opponetAttack.getName());
-            int opponetDamage = calculateDamage(trainerActivePokemon, playerActivePokemon, opponetAttack);
-
-            typeBonus = Data.typeEffectiveness(opponetAttack.getType(), playerActivePokemon.getType());
-            if (typeBonus == 0.0) {
-                Text.say("It had no effect.");
-            } else if (typeBonus == 0.5) {
-                Text.say("It was not very effective.");
-            } else if (typeBonus == 2.0) {
-                Text.say("It was super effective.");
-            }
-
-            playerActivePokemon.damage(opponetDamage);
-            Text.pauseNC();
-            moveEffects(trainerActivePokemon, playerActivePokemon, opponetAttack);
+            opponetAttack();
 
             
 
 
         } else {
 
-            Text.say(trainerActivePokemon.getName() + " used " + opponetAttack.getName());
-            int opponetDamage = calculateDamage(trainerActivePokemon, playerActivePokemon, opponetAttack);
-
-            double typeBonus = Data.typeEffectiveness(opponetAttack.getType(), playerActivePokemon.getType());
-            if (typeBonus == 0.0) {
-                Text.say("It had no effect.");
-            } else if (typeBonus == 0.5) {
-                Text.say("It was not very effective.");
-            } else if (typeBonus == 2.0) {
-                Text.say("It was super effective.");
-            }
-
-            playerActivePokemon.damage(opponetDamage);
-            Text.pauseNC();
-            moveEffects(trainerActivePokemon, playerActivePokemon, opponetAttack);
-
+            opponetAttack();
             
 
             if (playerActivePokemon.getTempHP() <= 0 || trainerActivePokemon.getTempHP() <= 0) {
                 return;
             }
 
-            Text.say(playerActivePokemon.getName() + " used " + playerAttack.getName());
-            int damageDone = calculateDamage(playerActivePokemon, trainerActivePokemon, playerAttack);
-            
-            typeBonus = Data.typeEffectiveness(playerAttack.getType(), trainerActivePokemon.getType());
-            if (typeBonus == 0.0) {
-                Text.say("It had no effect.");
-            } else if (typeBonus == 0.5) {
-                Text.say("It was not very effective.");
-            } else if (typeBonus == 2.0) {
-                Text.say("It was super effective.");
-            }
-
-            trainerActivePokemon.damage(damageDone);
-            Text.pauseNC();
-            moveEffects(playerActivePokemon, trainerActivePokemon,playerAttack);
+            playerAttack();
 
             
 
@@ -422,12 +400,17 @@ public class Battle {
 
     public void moveEffects(Pokemon user, Pokemon defender, Move attack) {
 
-        if (attack.getName().equals("Explosion")) {
+        switch(attack.getName()) {
 
+            case "Explosion":
                 Text.say(user.getName() + " blew itself up. . .");
                 Text.pauseNC();
-                trainerActivePokemon.damage(9999);
+                user.damage(9999);
+                break;
+            case "Night Shade":
+                defender.damage(user.getLevel());
         }
+        
     }
 
     public static Move enemyMove(Pokemon attacker, Pokemon defender) {
