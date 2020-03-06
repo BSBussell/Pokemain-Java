@@ -95,7 +95,8 @@ public class Battle {
             if (trainerActivePokemon.getTempHP() < 0) {
 
                 Text.say(trainerActivePokemon.getName() + " has fainted. . .");
-                int expGained = trainerActivePokemon.expYield()*playerActivePokemon.getLevel();
+                Text.pauseNC();
+                int expGained = trainerActivePokemon.expYield()*playerActivePokemon.getLevel()*500;
                 playerActivePokemon.addEXP(expGained);
                 
 
@@ -109,16 +110,45 @@ public class Battle {
                 }
 
                 return;
-            } else if (playerTeam.get(trainerActiveSlot).getTempHP() < 0) {
+            } else if (playerTeam.get(playerActiveSlot).getTempHP() < 0) {
 
                 Text.say(playerActivePokemon.getName() + " has fainted. . .");
 
                 if( !anyUsable(playerTeam)) {
 
                     Text.say(playerName + " is out of usable Pokemon.");
+                    
+                Text.pauseNC();
+                    return;
+                } else {
+                    
+                    Text.clearScreen();
+                    ArrayList<String> stringList = new ArrayList<String>();
+                    for (Pokemon idv : playerTeam) 
+                        stringList.add(idv.getName());
+                    
+                    String[] listOfPokemon = new String[stringList.size()];
+                    listOfPokemon = stringList.toArray(listOfPokemon);
+                    int pokemon;
+                    while (true) {
+                        pokemon = Text.drawPokeList(listOfPokemon);
+                        if (playerTeam.get(pokemon-1).getTempHP() <= 0) {
+                            Text.say("You cant send out a injured Pokemon!");
+                            Text.pause();
+                        } else if (playerActiveSlot != pokemon-1)
+                            break; 
+                    }
+                    Text.say(playerActivePokemon.getName() + ", switch out !");
+                    Text.say("Come Back!");
+                    Text.pauseNC();
+                    playerActiveSlot = pokemon - 1;
+                    playerActivePokemon = playerTeam.get(playerActiveSlot);
+                    Text.say("Go " + playerActivePokemon.getName() + "!");
+                    //Text.pause();
+                    menuLocation = 0;
                 }
                 Text.pauseNC();
-                return;
+                
             }
             if (caught) {
 
@@ -173,9 +203,14 @@ public class Battle {
 
                 menuLocation = Text.drawAttackMenu(move1, move2, move3, move4);
                 if (moveList.size() <= menuLocation - 1 && menuLocation != 5) {
-                    menuLocation = -9;
+                    menuLocation = 1;
+                    break;
+                } else if (menuLocation!=5){
+                    playerTurn = playerActivePokemon.getMoves().get(menuLocation-1);
+
+                    takeTurn(playerTurn);
                 }
-                menuLocation = (menuLocation == 5) ? 0 : menuLocation + 10;
+                menuLocation = 0;
                 break;
         case 2:
 
@@ -200,11 +235,13 @@ public class Battle {
                     you.addPokemonNext(trainerActivePokemon);
                     Text.say("Gotcha, the " + trainerActivePokemon.getName() + " was caught!");
                     Text.pause();
+                    you.useItem(bagSelection-1);
                     caught = true;
                 } else {
                     Text.say("You used a ball on " + trainerActivePokemon.getName());
                     Text.say("It did not work.");
                     Text.pauseNC();
+                    you.useItem(bagSelection-1);
                     opponetAttack();
                 }
 
@@ -212,7 +249,20 @@ public class Battle {
             menuLocation = 0;
             break;
         case 3:
-            Text.say("WIP");
+            //Text.say("WIP");
+            ArrayList<String> stringList = new ArrayList<String>();
+            for (Pokemon idv : playerTeam) 
+                stringList.add(idv.getName());
+            
+            String[] listOfPokemon = new String[stringList.size()];
+            listOfPokemon = stringList.toArray(listOfPokemon);
+            int pokemon = Text.drawPokeList(listOfPokemon);
+            Text.say(playerActivePokemon.getName() + ", switch out !");
+            Text.say("Come Back!");
+            Text.pauseNC();
+            playerActiveSlot = pokemon - 1;
+            playerActivePokemon = playerTeam.get(playerActiveSlot);
+            Text.say("Go " + playerActivePokemon.getName() + "!");
             Text.pause();
             menuLocation = 0;
             break;
@@ -223,7 +273,7 @@ public class Battle {
                 menuLocation = 0;
                 break;
             } else {
-                Text.say("PLease chill guys I can only work so fast...");
+                
                 int top = this.playerActivePokemon.getActualSpeed()*28;
                 int chance = (top/this.trainerActivePokemon.getActualSpeed())+30;
                 if (chance > 60) {
@@ -239,47 +289,7 @@ public class Battle {
                 menuLocation = 0;
                 break;
             }
-        case 11:
-
-            playerTurn = playerActivePokemon.getMoves().get(0);
-            opponetTurn = enemyMove(trainerActivePokemon, playerActivePokemon);
-
-            takeTurn(playerTurn, opponetTurn);
-            
-
-            menuLocation = 0;
-            break;
-        case 12:
-
-            playerTurn = playerActivePokemon.getMoves().get(1);
-            opponetTurn = enemyMove(trainerActivePokemon, playerActivePokemon);
-
-            takeTurn(playerTurn, opponetTurn);
-            
-
-            menuLocation = 0;
-            break;
-        case 13:
-
-            playerTurn = playerActivePokemon.getMoves().get(2);
-            opponetTurn = enemyMove(trainerActivePokemon, playerActivePokemon);
-
-            takeTurn(playerTurn, opponetTurn);
-            
-
-            menuLocation = 0;
-            break;
-
-        case 14:
-
-            playerTurn = playerActivePokemon.getMoves().get(3);
-            opponetTurn = enemyMove(trainerActivePokemon, playerActivePokemon);
-
-            takeTurn(playerTurn, opponetTurn);
-            
-
-            menuLocation = 0;
-            break;
+        
 
 
 
@@ -323,7 +333,8 @@ public class Battle {
 
     }
 
-    public void playerAttack() {
+    public void playerAttack(Move playerAttack) {
+        
         Text.say(playerActivePokemon.getName() + " used " + playerAttack.getName());
         int damageDone = calculateDamage(playerActivePokemon, trainerActivePokemon, playerAttack);
 
@@ -349,7 +360,7 @@ public class Battle {
         Text.say(trainerActivePokemon.getName() + " used " + opponetAttack.getName());
         int opponetDamage = calculateDamage(trainerActivePokemon, playerActivePokemon, opponetAttack);
 
-        typeBonus = Data.typeEffectiveness(opponetAttack.getType(), playerActivePokemon.getType());
+        double typeBonus = Data.typeEffectiveness(opponetAttack.getType(), playerActivePokemon.getType());
         
         if (typeBonus == 0.0) {
             Text.say("It had no effect.");
@@ -364,11 +375,11 @@ public class Battle {
         moveEffects(trainerActivePokemon, playerActivePokemon, opponetAttack);
     }
 
-    public void takeTurn(Move playerAttack, Move opponetAttack) {
+    public void takeTurn(Move playerAttack) {
         
         if (playerActivePokemon.getActualSpeed() > trainerActivePokemon.getActualSpeed()) {
 
-            playerAttack();
+            playerAttack(playerAttack);
             
 
             if (playerActivePokemon.getTempHP() <= 0 || trainerActivePokemon.getTempHP() <= 0) {
@@ -390,7 +401,7 @@ public class Battle {
                 return;
             }
 
-            playerAttack();
+            playerAttack(playerAttack);
 
             
 

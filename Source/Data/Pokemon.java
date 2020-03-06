@@ -84,17 +84,18 @@ public class Pokemon {
 
         for (int i = 0; i < level; i++) {
 
-            Data.learnSet(i, type);
+            Data.learnSet(type, i);
         }
     }
 
     public void learnMove(Move learning) {
 
         
-        Text.say(name + "Wants to learn " + learning.getName() + "...");
+        Text.say(name + " Wants to learn " + learning.getName() + "...");
+        Text.pauseNC();
         if (this.moves.size()>=4) {
 			Text.say("But " +this.name+ " already knows four moves...");
-            Text.pause();
+            Text.pauseNC();
             boolean wantToLearn = Text.pickOption("Does " + name + " want to forget a old move and learn " + learning.getName()+"?","Yes, learn a new move", "No, keep old moves");
 
             if (wantToLearn==false) {
@@ -102,7 +103,7 @@ public class Pokemon {
                 Text.pause();
                 return;
             } else {
-                String[] preExisting = new String[]{moves.get(0), moves.get(1), moves.get(2), moves.get(3)};
+                String[] preExisting = new String[]{moves.get(0).getName(), moves.get(1).getName(), moves.get(2).getName(), moves.get(3).getName()};
                 int position = Text.menu("Pick a move to forget: ", preExisting) - 1;
                 
                 System.out.println(name + " learned " + learning.getName());
@@ -111,17 +112,18 @@ public class Pokemon {
         } else {
             
             System.out.println(name + " learned " + learning.getName());
-            addMove(learning, -1);
+            addMove(learning);
         }
         
+    }
+
+    public void addMove(Move name) {
+        moves.add(name);
     }
     
     public void addMove(Move name, int pos) {
         
-        if (pos == -1)
-            moves.add(name); 
-        else
-            moves.set(pos, name);
+        moves.set(pos, name);
     }
 
     public String getName() {

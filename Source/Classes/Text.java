@@ -128,13 +128,46 @@ public class Text {
         return Integer.parseInt(response);  
     }
 
+    public static int drawPokeList(String[] pokemon) {
+
+        System.out.println("*========================*");
+
+        int count = 1;
+
+        for (String creature : pokemon) {
+
+            System.out.println("= (" + count + ") " + creature);
+            count++;
+        }
+
+        System.out.println("*========================*");
+
+        String response;
+
+        badPractice:
+        while (true) {
+
+            System.out.print("> ");
+            response = keyboard.nextLine();
+
+            for (int i = 1; i <= pokemon.length; i++) 
+                if (response.equalsIgnoreCase(Integer.toString(i))) 
+                    break badPractice;
+                
+            
+
+        }
+
+        return Integer.parseInt(response);
+    }
+
     public static int drawBagSpace(int[] items) {
 
         System.out.println("*========================*");
-        System.out.println("= (1)Poke Ball "  + "x" + items[0]+"=");
-        System.out.println("= (2)Great Ball " + "x" + items[1]+"=");
-        System.out.println("= (3)Ultra Ball " + "x" + items[2]+"=");
-        System.out.println("= (4)Master Ball " + "x" + items[3]+"=");
+        System.out.println("= (1)Poke Ball   "  + "x" + items[0]);
+        System.out.println("= (2)Great Ball  " + "x" + items[1]);
+        System.out.println("= (3)Ultra Ball  " + "x" + items[2]);
+        System.out.println("= (4)Master Ball " + "x" + items[3]);
         System.out.println("= (5)Back                =");
         System.out.println("*========================*");
 

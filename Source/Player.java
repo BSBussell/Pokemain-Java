@@ -90,6 +90,16 @@ public class Player {
         return this.team;
     }
 
+    public void addItem(int pos) {
+
+        this.bag[pos]++;
+    }
+
+    public void useItem(int pos) {
+
+        this.bag[pos]--;
+    }
+
     public int[] getBag() {
 
         return this.bag;

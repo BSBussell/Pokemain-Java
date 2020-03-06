@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 class Main {
     
@@ -37,22 +38,24 @@ class Main {
                 Text.say("You Picked Charmander!!!");
                 Text.pause();
                 Pokemon charmander = Data.getPokemon(4, 5);
-                charmander.addMove(Data.getMove(27),0);
-                charmander.addMove(Data.getMove(16),1);
+                charmander.addMove(Data.getMove(27));
+                charmander.addMove(Data.getMove(70));
                 main.addPokemonToTeam(charmander,0);
                 break;
             case 2:
                 Text.say("You Picked Bulbasaur!!!");
                 Text.pause();
                 Pokemon bulbasaur = Data.getPokemon(1,5);
-                bulbasaur.addMove(Data.getMove(0),0);
+                bulbasaur.addMove(Data.getMove(0));
+                bulbasaur.addMove(Data.getMove(86));
                 main.addPokemonToTeam(bulbasaur,0);
                 break;
             case 3:
                 Text.say("You Picked Squirtle!!!");
                 Text.pause();
                 Pokemon squirtle = Data.getPokemon(7, 5);
-                squirtle.addMove(Data.getMove(10), 0);
+                squirtle.addMove(Data.getMove(9));
+                squirtle.addMove(Data.getMove(86));
                 main.addPokemonToTeam(squirtle,0);
                 break;
         }
@@ -67,7 +70,7 @@ class Main {
 
 
         while(true) {
-            String[] places = new String[]{"Wild-Debug", "Trainer-Debug", "PokeCenter","N-Word", "Stats"};
+            String[] places = new String[]{"Wild-Debug", "Trainer-Debug", "PokeCenter","PokeMart", "Pokemon"};
             int location = Text.menu("Where would you like to go?", places);
             if (location == 1) {
 
@@ -86,15 +89,32 @@ class Main {
                 Text.pause();
             } else if (location == 4) {
 
-                Text.say("39 Lashing for " + main.getName());
+                Text.say("PokeMart " + main.getName());
                 Text.pause();
             } else if (location == 5) {
             
+                Text.clearScreen();
+
+                ArrayList<String> stringList = new ArrayList<String>();
+                for (Pokemon idv : main.getTeam()) 
+                    stringList.add(idv.getName());
+                    
+                String[] listOfPokemon = new String[stringList.size()];
+                listOfPokemon = stringList.toArray(listOfPokemon);
+                int pokemon = Text.drawPokeList(listOfPokemon);
+
+                Text.clearScreen();
                 
-                for (Pokemon idv : main.getTeam()) {
+                String[] options = new String[] {"Summary","Swap","Back"};
+                int option = Text.menu("What would you like to do?",options);
+
+                if (option == 3)
+                    
+
+                /*for (Pokemon idv : main.getTeam()) {
                     Text.say(idv.toString());
                     Text.pause();
-                }
+                }*/
             } 
         }
     }
@@ -102,7 +122,9 @@ class Main {
     public static void loadWildBattleTest(Player main) {
 
         Pokemon first = Data.getPokemon(1,5);
-        first.addMove(Data.getMove(0),0);
+        first.addMove(Data.getMove(0));
+        first.addMove(Data.getMove(27));
+        first.addMove(Data.getMove(9));
 
         Battle demo = new Battle(main, first);
         demo.battleStart();
