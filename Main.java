@@ -108,7 +108,19 @@ class Main {
                 String[] options = new String[] {"Summary","Swap","Back"};
                 int option = Text.menu("What would you like to do?",options);
 
-                if (option == 3)
+                if (option == 1) {
+                    Text.clearScreen();
+                    Text.say(main.getTeam().get(pokemon-1).toString());
+                    Text.pause();
+                } else if (option == 2) {
+                    Text.say("Select the Pokemon you'd like to swap with: ");
+                    int swapWith = pokemon;
+                    while (swapWith == pokemon) {
+                        Text.say("Please select a different Pokemon: ");
+                        swapWith = Text.drawPokeList(listOfPokemon); 
+                    }
+                    main.swapPokemon(pokemon-1, swapWith-1);
+                }
                     
 
                 /*for (Pokemon idv : main.getTeam()) {

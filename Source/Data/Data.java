@@ -875,7 +875,9 @@ public class Data {
             
             case 100:
                 return new Move("Wrap", "Normal", 15, 90, true);
-            
+            case 101:
+                return new Move("Bite","Normal", 60,100,true);
+                // Flinch
 
 
 
@@ -922,21 +924,21 @@ public class Data {
                     case 8:
                         return getMove(16); // Cut
                     case 19:
-                        return getMove(0); // Lick
+                        return getMove(50); // Lick
                     case 23:
-                        return getMove(0); // Take Down
+                        return getMove(87); // Take Down
                     case 27:
-                        return getMove(0); // Rage
+                        return getMove(64); // Rage
                     case 32:
-                        return getMove(0); // Pay Day
+                        return getMove(55); // Pay Day
                     case 52:
-                        return getMove(0); // Body Slam
+                        return getMove(6); // Body Slam
                     case 58:
-                        return getMove(0); // Strength
+                        return getMove(81); // Strength
                     case 62:
-                        return getMove(0); // Hyper Bean
+                        return getMove(43); // Hyper Bean
                     case 68:
-                        return getMove(0); // Double-Edge
+                        return getMove(22); // Double-Edge
                     default:
                         return new Move("Null", "Null", 0, 0, true);
                 }
@@ -949,13 +951,15 @@ public class Data {
                     case 16:
                         return getMove(31); // Fire Spin
                     case 24:
-                        return getMove(0); // Rage
+                        return getMove(64); // Rage
                     case 36:
-                        return getMove(0); // Slash
+                        return getMove(75); // Slash
+                    case 39: 
+                        return getMove(30); // Fire Punch
                     case 46:
-                        return getMove(0); // Flamethrower
+                        return getMove(33); // Flamethrower
                     case 55:
-                        return getMove(0); // Fire Blast
+                        return getMove(29); // Fire Blast
                     default:
                         return new Move("Null", "Null", 0, 0, true);
                         
@@ -965,15 +969,15 @@ public class Data {
                     case 2:
                         return getMove(86); // Tackle
                     case 15:
-                        return getMove(0); // Water Gun
+                        return getMove(97); // Water Gun
                     case 24:
-                        return getMove(0); // Bite
+                        return getMove(101); // Bite
                     case 31:
                         return getMove(0); // Withdrawl
                     case 42:
-                        return getMove(0); // Skull Bash
+                        return getMove(72); // Skull Bash
                     case 52:
-                        return getMove(0); // Hydro Pump
+                        return getMove(42); // Hydro Pump
                     default:
                         return new Move("Null", "Null", 0, 0, true);
                 }
@@ -987,15 +991,25 @@ public class Data {
             case "Grass":
                 switch(level) {
                     case 5:
-                        return getMove(0); // Tackle
+                        return getMove(86); // Tackle
                     case 8:
                         return getMove(0); // Absorb
+                    case 10:
+                        return getMove(16); // Cut
                     case 13:
-                        return getMove(0); // Vine Whip
+                        return getMove(95); // Vine Whip
+                    case 18:
+                        return getMove(76); // Sludge
+                    case 20:
+                        return getMove(63); // Quick Attack
+                    case 25:
+                        return getMove(51); // Mega Drain
                     case 30:
-                        return getMove(0); // Razor Leaf
+                        return getMove(65); // Razor Leaf
+                    case 40:
+                        return getMove(57); // Petal Dance
                     case 65:
-                        return getMove(0); // Solar Bean
+                        return getMove(78); // Solar Bean
                     default:
                         return new Move("Null", "Null", 0, 0, true);
                 }
@@ -1067,21 +1081,21 @@ public class Data {
             case "Dragon":
                 switch(level) {
                     case 5:
-                        return getMove(0); // Wrap
+                        return getMove(100); // Wrap
                     case 10:
-                        return getMove(0); // Thunderbolt
+                        return getMove(92); // Thunderbolt
                     case 14:
-                        return getMove(0); // Swift
+                        return getMove(85); // Swift
                     case 23:
-                        return getMove(0); // Surf
+                        return getMove(84); // Surf
                     case 27:
-                        return getMove(0); // Strength
+                        return getMove(81); // Strength
                     case 35:
-                        return getMove(0); // Slam
+                        return getMove(74); // Slam
                     case 45:
-                        return getMove(0); // Dragon Rage
+                        return getMove(17); // Dragon Rage
                     case 60:
-                        return getMove(0); // Hyper Beam
+                        return getMove(43); // Hyper Beam
                     default:
                         return new Move("Null", "Null", 0, 0, true);
                 }

@@ -68,7 +68,16 @@ public class Player {
    
     }
 
-    public void swapPokemon(int pcIndex, int teamIndex) {
+    public void swapPokemon(int index1, int index2) {
+
+        Pokemon temp1 = team.get(index1);
+        Pokemon temp2 = team.get(index2);
+
+        team.set(index1,temp2);
+        team.set(index2,temp1);
+    }
+
+    public void swapPokemonPC(int pcIndex, int teamIndex) {
 
         if (team.size() <= teamIndex+1) {
 
